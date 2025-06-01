@@ -180,28 +180,6 @@ const ProjectDistribution: React.FC = () => {
             </div>
           </div>
         </div>
-
-        {/* 重要里程碑 */}
-        <div className="mt-20">
-          <h4 className="text-xl font-semibold text-white mb-8 text-center">重要里程碑</h4>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="text-center p-6 bg-gray-800/50 rounded-lg">
-              <div className="text-2xl font-bold text-blue-400 mb-2">2010</div>
-              <h5 className="font-medium text-white mb-2">上海世博會阿曼館</h5>
-              <p className="text-sm text-gray-400">國際招標第二名</p>
-            </div>
-            <div className="text-center p-6 bg-gray-800/50 rounded-lg">
-              <div className="text-2xl font-bold text-green-400 mb-2">2016</div>
-              <h5 className="font-medium text-white mb-2">揚州京華城</h5>
-              <p className="text-sm text-gray-400">招標第一名</p>
-            </div>
-            <div className="text-center p-6 bg-gray-800/50 rounded-lg">
-              <div className="text-2xl font-bold text-orange-400 mb-2">2019</div>
-              <h5 className="font-medium text-white mb-2">淡江大學</h5>
-              <p className="text-sm text-gray-400">傑出系友</p>
-            </div>
-          </div>
-        </div>
       </div>
     </section>
   );
