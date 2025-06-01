@@ -8,8 +8,6 @@ interface NavItem {
 const navItems: NavItem[] = [
   { name: 'Core Values', id: 'core-values' },
   { name: 'Architecture', id: 'architecture' },
-  { name: 'Interior', id: 'interior' },
-  { name: 'Planning', id: 'planning' },
   { name: 'Contact', id: 'contact-us' }
 ];
 
