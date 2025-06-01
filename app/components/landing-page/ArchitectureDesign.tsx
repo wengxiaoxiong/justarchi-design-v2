@@ -77,7 +77,7 @@ const ArchitectureDesign: React.FC = () => {
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8">
         {/* 建築設計 */}
         <div className="mb-20">
-          <h2 className="font-playfair text-3xl md:text-4xl font-bold mb-4 text-center">建築設計</h2>
+          <h2 className="font-playfair text-3xl md:text-4xl font-bold mb-4 text-center text-black">建築設計</h2>
           <p className="text-center text-gray-600 mb-8 md:mb-12 lg:mb-16">Architecture Design</p>
           <div className="grid grid-cols-12 gap-4 md:gap-6 lg:gap-8">
             {architectureProjects.map((project) => (
@@ -98,7 +98,7 @@ const ArchitectureDesign: React.FC = () => {
 
         {/* 室內設計 */}
         <div className="mb-20" id="interior">
-          <h2 className="font-playfair text-3xl md:text-4xl font-bold mb-4 text-center">室內設計</h2>
+          <h2 className="font-playfair text-3xl md:text-4xl font-bold mb-4 text-center text-black">室內設計</h2>
           <p className="text-center text-gray-600 mb-8 md:mb-12 lg:mb-16">Interior Design</p>
           <div className="grid grid-cols-12 gap-4 md:gap-6 lg:gap-8">
             {interiorProjects.map((project) => (
@@ -119,7 +119,7 @@ const ArchitectureDesign: React.FC = () => {
 
         {/* 城市規劃 */}
         <div id="planning">
-          <h2 className="font-playfair text-3xl md:text-4xl font-bold mb-4 text-center">城市規劃</h2>
+          <h2 className="font-playfair text-3xl md:text-4xl font-bold mb-4 text-center text-black">城市規劃</h2>
           <p className="text-center text-gray-600 mb-8 md:mb-12 lg:mb-16">Urban Planning</p>
           <div className="grid grid-cols-12 gap-4 md:gap-6 lg:gap-8">
             {planningProjects.map((project) => (

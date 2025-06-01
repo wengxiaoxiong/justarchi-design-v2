@@ -104,7 +104,7 @@ const ProjectDistribution: React.FC = () => {
           {/* 世界地图 */}
           <div className="mb-12 flex justify-center">
             <div className="bg-gray-800/30 p-6 rounded-lg border border-gray-700/50 overflow-hidden">
-              <div style={{ transform: 'scale(2.5) translateX(-170px) translateY(-20px)', transformOrigin: 'center' }}>
+              <div className="scale-[2] translate-x-[-200%] -translate-y-[5%] sm:scale-200 sm:translate-x-[-300px] sm:translate-y-0" style={{ transformOrigin: 'center' }}>
                 <WorldMap 
                   color="#3b82f6" 
                   valueSuffix=" 個項目" 
