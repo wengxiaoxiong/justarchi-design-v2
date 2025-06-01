@@ -13,7 +13,7 @@ const Hero: React.FC = () => {
       </div>
       <div className="relative h-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 flex items-center">
         <div className="max-w-xs sm:max-w-md md:max-w-lg lg:max-w-2xl text-white">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 leading-tight tracking-wide">
+          <h1 className="font-playfair text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 leading-tight tracking-wide">
             Creating Timeless Architectural Art
           </h1>
           <p className="text-sm sm:text-base md:text-lg lg:text-xl mb-6 sm:mb-8 md:mb-12 leading-relaxed tracking-wide font-light">

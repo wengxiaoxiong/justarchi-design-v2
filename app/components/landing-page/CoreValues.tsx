@@ -49,7 +49,7 @@ const CoreValues: React.FC = () => {
 
                 {/* 内容区域 */}
                 <div>
-                  <h3 className="text-xl md:text-2xl font-light text-gray-900 mb-4 leading-tight">
+                  <h3 className="font-playfair text-xl md:text-2xl font-light text-gray-900 mb-4 leading-tight">
                     {value.title}
                   </h3>
                   <p className="text-sm md:text-base text-gray-600 leading-relaxed font-light">

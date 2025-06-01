@@ -39,7 +39,7 @@ const ArchitectureDesign: React.FC = () => {
   return (
     <section id="architecture" className="py-16 md:py-20 lg:py-24 bg-white">
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8">
-        <h2 className="text-3xl md:text-4xl font-bold mb-8 md:mb-12 lg:mb-16 text-center">Architecture Design</h2>
+        <h2 className="font-playfair text-3xl md:text-4xl font-bold mb-8 md:mb-12 lg:mb-16 text-center">Architecture Design</h2>
         <div className="grid grid-cols-12 gap-4 md:gap-6 lg:gap-8">
           {architectureProjects.map((project) => (
             <ProjectCard

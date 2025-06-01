@@ -52,7 +52,6 @@ const App: React.FC = () => {
         <div className="min-h-screen w-full overflow-x-hidden landing-page">
             {/* 导航栏 */}
             <Navigation activeSection={activeSection} />
-            
             {/* 页面内容 */}
             <Hero />
             <CoreValues />

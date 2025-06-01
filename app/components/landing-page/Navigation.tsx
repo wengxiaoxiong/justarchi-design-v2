@@ -51,7 +51,7 @@ const Navigation: React.FC<NavigationProps> = ({ activeSection }) => {
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 h-20 flex items-center justify-between">
         <div className="flex items-center">
           <div 
-            className={`text-xl sm:text-2xl font-bold text-white tracking-wider cursor-pointer relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:h-[2px] after:bg-white after:transition-all after:duration-300 ${
+            className={`font-playfair text-xl sm:text-2xl font-bold text-white tracking-wider cursor-pointer relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:h-[2px] after:bg-white after:transition-all after:duration-300 ${
               activeSection === 'home' ? 'after:w-full' : 'after:w-0 hover:after:w-full'
             }`}
             onClick={() => scrollToSection('home')}
