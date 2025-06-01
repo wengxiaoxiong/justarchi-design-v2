@@ -6,8 +6,6 @@ import Navigation from './components/landing-page/Navigation';
 import Hero from './components/landing-page/Hero';
 import CoreValues from './components/landing-page/CoreValues';
 import ArchitectureDesign from './components/landing-page/ArchitectureDesign';
-import InteriorDesign from './components/landing-page/InteriorDesign';
-import PlanningDesign from './components/landing-page/PlanningDesign';
 import Contact from './components/landing-page/Contact';
 import useActiveSection from './hooks/useActiveSection';
 import useScrollAnimation from './hooks/useScrollAnimation';
@@ -59,8 +57,6 @@ const App: React.FC = () => {
             <Hero />
             <CoreValues />
             <ArchitectureDesign />
-            <InteriorDesign />
-            <PlanningDesign />
             <Contact />
         </div>
     );
