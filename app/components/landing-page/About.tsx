@@ -62,18 +62,18 @@ About: React.FC = () => {
           {[{
             name: "翁獅（紹珉）",
             nameEn: "Leo Weng",
-            title: "得體設計建築師事務所 創辦人",
-            description: "美國紐約州註冊建築師，台灣註冊建築師，淡江大學建築系傑出系友 (2019)"
+            title: "創辦人",
+            description: "美國紐約州註冊建築師，台灣註冊建築師，英國倫敦大學巴特雷學院建築碩士，淡江大學建築系傑出系友"
           }, {
             name: "陳馥郁",
             nameEn: "Fuyu Chen",
-            title: "首席設計師",
+            title: "室內設計師",
             description: "擁有30餘年空間設計經驗，擅長融合現代美學與空間機能。"
           }, {
             name: "宋偉祥",
             nameEn: "Wei-Hsiang Song",
-            title: "首席設計師",
-            description: "美國賓州大學建築碩士，淡江大學建築系講師"
+            title: "建築設計師",
+            description: "美國賓州大學建築碩士，淡江大學建築系講師，20餘年建築設計經驗"
           }].map((person, i) => (
             <motion.div key={i} variants={fadeInUp} transition={{ duration: 0.6, ease: "easeOut" }}>
               <PersonCard {...person} />

@@ -1,30 +1,65 @@
 import React from 'react';
+import WorldMap from "react-svg-worldmap";
 
 interface ProjectLocation {
   name: string;
   nameEn: string;
   projects: number;
   featured?: boolean;
+  countryCode?: string;
 }
 
 const projectLocations: ProjectLocation[] = [
-  { name: '台北', nameEn: 'Taipei', projects: 5, featured: true },
-  { name: '上海', nameEn: 'Shanghai', projects: 8, featured: true },
-  { name: '北京', nameEn: 'Beijing', projects: 3 },
-  { name: '揚州', nameEn: 'Yangzhou', projects: 4, featured: true },
-  { name: '蘇州', nameEn: 'Suzhou', projects: 3 },
-  { name: '鄭州', nameEn: 'Zhengzhou', projects: 2 },
-  { name: '南京', nameEn: 'Nanjing', projects: 2 },
-  { name: '合肥', nameEn: 'Hefei', projects: 1 },
-  { name: '長沙', nameEn: 'ChangSha', projects: 1 },
-  { name: '廣州', nameEn: 'Guangzhou', projects: 2 },
-  { name: '香港', nameEn: 'Hong Kong', projects: 1 },
-  { name: '曼谷', nameEn: 'Bangkok', projects: 2 },
-  { name: '柬埔寨', nameEn: 'Cambodia', projects: 1 }
+  { name: '台北', nameEn: 'Taipei', projects: 5, featured: true, countryCode: 'tw' },
+  { name: '上海', nameEn: 'Shanghai', projects: 8, featured: true, countryCode: 'cn' },
+  { name: '北京', nameEn: 'Beijing', projects: 3, countryCode: 'cn' },
+  { name: '揚州', nameEn: 'Yangzhou', projects: 4, featured: true, countryCode: 'cn' },
+  { name: '蘇州', nameEn: 'Suzhou', projects: 3, countryCode: 'cn' },
+  { name: '鄭州', nameEn: 'Zhengzhou', projects: 2, countryCode: 'cn' },
+  { name: '南京', nameEn: 'Nanjing', projects: 2, countryCode: 'cn' },
+  { name: '合肥', nameEn: 'Hefei', projects: 1, countryCode: 'cn' },
+  { name: '長沙', nameEn: 'ChangSha', projects: 1, countryCode: 'cn' },
+  { name: '廣州', nameEn: 'Guangzhou', projects: 2, countryCode: 'cn' },
+  { name: '香港', nameEn: 'Hong Kong', projects: 1, countryCode: 'hk' },
+  { name: '曼谷', nameEn: 'Bangkok', projects: 3, countryCode: 'th' },
+  { name: '柬埔寨', nameEn: 'Cambodia', projects: 1, countryCode: 'kh' }
 ];
 
 const ProjectDistribution: React.FC = () => {
   const totalProjects = projectLocations.reduce((sum, location) => sum + location.projects, 0);
+
+  // 根据项目位置生成地图数据
+  const generateMapData = () => {
+    const countryProjects: { [key: string]: number } = {};
+    
+    // 聚合每个国家的项目数量
+    projectLocations.forEach(location => {
+      if (location.countryCode) {
+        const countryCode = location.countryCode.toLowerCase();
+        countryProjects[countryCode] = (countryProjects[countryCode] || 0) + location.projects;
+      }
+    });
+
+    // 转换为 WorldMap 需要的格式，使用统一的值以显示相同颜色
+    return Object.entries(countryProjects).map(([country]) => ({
+      country,
+      value: 1 // 使用统一值，让所有国家显示相同颜色
+    }));
+  };
+
+  const mapData = generateMapData();
+
+  // 自定义国家名称显示
+  const getCountryDisplayName = (countryCode: string) => {
+    const countryNames: { [key: string]: string } = {
+      'cn': '中国大陆',
+      'tw': '台湾地区',
+      'hk': '香港特别行政区',
+      'th': '泰国',
+      'kh': '柬埔寨'
+    };
+    return countryNames[countryCode.toLowerCase()] || countryCode;
+  };
 
   return (
     <section id="project-distribution" className="py-16 md:py-24 lg:py-32 bg-gray-900 text-white">
@@ -64,8 +99,38 @@ const ProjectDistribution: React.FC = () => {
 
         {/* 地理分布 */}
         <div className="mb-16">
-          <h4 className="text-xl font-semibold text-white mb-8 text-center">項目地理分布</h4>
+          <h4 className="text-xl font-semibold text-white mb-8 text-center">詳細項目分布</h4>
           
+          {/* 世界地图 */}
+          <div className="mb-12 flex justify-center">
+            <div className="bg-gray-800/30 p-6 rounded-lg border border-gray-700/50 overflow-hidden">
+              <div style={{ transform: 'scale(2.5) translateX(-170px) translateY(-20px)', transformOrigin: 'center' }}>
+                <WorldMap 
+                  color="#3b82f6" 
+                  valueSuffix=" 個項目" 
+                  size={600}
+                  data={mapData}
+                  backgroundColor="transparent"
+                  tooltipBgColor="#1f2937"
+                  tooltipTextColor="#ffffff"
+                  valuePrefix=""
+                  borderColor="#6b7280"
+                  strokeOpacity={0.8}
+                  frame={false}
+                  richInteraction={true}
+                  tooltipTextFunction={(context) => {
+                    // 获取该国家的实际项目数量
+                    const countryCode = context.countryCode.toLowerCase();
+                    const actualProjects = projectLocations
+                      .filter(location => location.countryCode?.toLowerCase() === countryCode)
+                      .reduce((sum, location) => sum + location.projects, 0);
+                    return `${getCountryDisplayName(context.countryCode)}: ${actualProjects} 個項目`;
+                  }}
+                />
+              </div>
+            </div>
+          </div>
+
           {/* 重點項目區域 */}
           <div className="mb-12">
             <h5 className="text-lg font-medium text-blue-400 mb-6">重點項目城市</h5>
