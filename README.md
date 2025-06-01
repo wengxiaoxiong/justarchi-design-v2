@@ -1,36 +1,139 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 得體設計建築師事務所 - 官方網站
 
-## Getting Started
+> JUSTARCHI / WENG SHI ARCHITECTS
 
-First, run the development server:
+## 關於項目
+
+這是翁紹珉建築師事務所的官方網站，基於真實的作品集資料打造。網站展示了翁紹珉建築師的設計哲學、代表作品和專業成就。
+
+## 設計師簡介
+
+**翁紹珉（獅）/ Leo Weng**
+- 得體設計建築師事務所 創辦人
+- 美國紐約州註冊建築師
+- 台灣註冊建築師
+- 2019 淡江大學建築系傑出系友
+
+### 學歷
+- 2000 英國倫敦大學巴特雷學院建築碩士
+- 1996 淡江大學建築學士
+- 1991 臺北市建國中學
+
+### 設計哲學
+"JUST"蘊含公平、正義、恰當、剛剛好的多重意涵，體現了中庸之道與至善狀態的價值取向。
+
+## 網站功能
+
+### 首頁 (Hero)
+- 得體設計品牌展示
+- 設計理念介紹
+- 雙語標題設計
+
+### 關於頁面 (About)
+- 翁紹珉詳細履歷
+- 設計理念深度解析
+- 專業資歷展示
+- 教學經歷介紹
+
+### 設計哲學 (Core Values)
+1. **中庸的態度** - Just Attitude
+2. **緊湊都市主義** - Compact Urbanism  
+3. **傳統與現代融合** - Tradition Meets Modern
+
+### 作品展示 (Architecture Design)
+
+#### 建築設計項目
+- 揚州京華城商業步行街
+- 上海世博會阿曼館（國際招標第二名）
+- 鄭州城市綜合體
+- 蘇州河城市設計
+
+#### 室內設計項目
+- 法國哈金森 Fab House（蘇州）
+- 桃園崇德佛堂
+
+#### 城市規劃項目
+- 莆田白塘湖旅遊規劃
+- 上海吳中路地鐵上蓋綜合體
+- 萬華區政中心規劃
+
+### 項目分佈 (Project Distribution)
+- 跨越亞洲13個城市
+- 總計40+個重要項目
+- 重要里程碑展示
+- 地理分佈可視化
+
+### 聯繫資訊 (Contact)
+- 創辦人詳細介紹
+- 國際榮譽展示
+- 聯繫方式
+
+## 技術特性
+
+- **響應式設計**: 支持桌面端和移動端
+- **中英文內容**: 雙語展示
+- **平滑滾動**: 導航交互優化
+- **動畫效果**: 頁面滾動動畫
+- **現代UI**: 基於TailwindCSS的現代設計
+
+## 國際榮譽
+
+- 2010 上海世博會阿曼國家館國際招標第二名
+- 日本JCD設計大賞（與臺灣龍采合作）
+- 湖南株洲天元區政中心招標首獎
+- 揚州京華城招標第一名（與上海合院合作）
+- 228公園與萬華406國際競圖佳作
+- 中國民族建築協會設計影響力人物
+
+## 項目地域分佈
+
+作品遍及：
+- **台灣**: 台北、彰化、桃園
+- **中國大陸**: 上海、北京、揚州、蘇州、鄭州、南京、合肥、長沙、廣州
+- **其他地區**: 香港、泰國曼谷、柬埔寨
+
+## 設計理念特色
+
+### 緊湊都市主義實驗
+- 台北動態薄膜與萬華406廣場國際競圖
+- 可變建築理念
+- 最大化綠化與植被，最小化人造設施
+
+### 傳統與現代融合
+- 中式園林空間與現代商業結合
+- 符號策略與空間詮釋
+- 保留歷史情感的現代建築
+
+## 技術棧
+
+- **前端框架**: Next.js 14
+- **樣式**: TailwindCSS
+- **字體**: Playfair Display, 中文字體
+- **圖標**: Font Awesome
+- **構建工具**: pnpm
+
+## 開發說明
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+# 安裝依賴
+pnpm install
+
+# 開發模式
 pnpm dev
-# or
-bun dev
+
+# 構建生產版本
+pnpm build
+
+# 啟動生產服務器
+pnpm start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 設計特色
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. **得體設計哲學**: 體現中庸之道的設計理念
+2. **國際視野**: 橫跨多個國家和地區的項目經驗
+3. **文化融合**: 東西方建築文化的深度融合
+4. **可持續發展**: 注重生態環保的設計理念
+5. **創新實踐**: 緊湊都市主義的前瞻性探索
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+這個網站不僅是一個作品展示平台，更是翁紹珉建築師"得體設計"理念的數位體現。

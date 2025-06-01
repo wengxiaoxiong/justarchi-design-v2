@@ -4,8 +4,10 @@
 import React, { useEffect } from 'react';
 import Navigation from './components/landing-page/Navigation';
 import Hero from './components/landing-page/Hero';
+import About from './components/landing-page/About';
 import CoreValues from './components/landing-page/CoreValues';
 import ArchitectureDesign from './components/landing-page/ArchitectureDesign';
+import ProjectDistribution from './components/landing-page/ProjectDistribution';
 import Contact from './components/landing-page/Contact';
 import useActiveSection from './hooks/useActiveSection';
 import useScrollAnimation from './hooks/useScrollAnimation';
@@ -13,7 +15,7 @@ import useScrollAnimation from './hooks/useScrollAnimation';
 const App: React.FC = () => {
     // 使用自定义Hook检测当前活动区域
     const activeSection = useActiveSection({
-        sections: ['home', 'core-values', 'architecture', 'interior', 'planning', 'contact-us']
+        sections: ['home', 'about', 'core-values', 'architecture', 'interior', 'planning', 'contact-us']
     });
     
     // 使用自定义Hook处理滚动动画
@@ -54,8 +56,10 @@ const App: React.FC = () => {
             <Navigation activeSection={activeSection} />
             {/* 页面内容 */}
             <Hero />
+            <About />
             <CoreValues />
             <ArchitectureDesign />
+            <ProjectDistribution />
             <Contact />
         </div>
     );

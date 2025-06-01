@@ -4,27 +4,38 @@ const Contact: React.FC = () => {
   return (
     <section id="contact-us" className="min-h-screen bg-black text-white flex items-center">
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 py-16 sm:py-20 md:py-24 lg:py-32">
-        <h2 className="font-playfair text-3xl sm:text-4xl md:text-5xl font-bold mb-10 sm:mb-16 md:mb-24 text-center">Contact Us</h2>
+        <h2 className="font-playfair text-3xl sm:text-4xl md:text-5xl font-bold mb-10 sm:mb-16 md:mb-24 text-center">聯繫我們</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16">
           <div className="space-y-10 md:space-y-16">
             <div>
-              <h3 className="font-playfair text-xl sm:text-2xl font-bold mb-4 sm:mb-6">Studio Address</h3>
+              <h3 className="font-playfair text-xl sm:text-2xl font-bold mb-4 sm:mb-6">創辦人 / Founder</h3>
               <p className="text-gray-300 mb-6 sm:mb-8 leading-relaxed text-base sm:text-lg">
-                1000 Century Avenue, Pudong New Area<br />
-                88F, Shanghai World Financial Center<br />
-                Shanghai, 200120, China
+                翁紹珉（獅）/ Leo Weng<br />
+                得體設計建築師事務所 創辦人<br />
+                美國紐約州註冊建築師<br />
+                台灣註冊建築師
               </p>
             </div>
             <div>
-              <h3 className="font-playfair text-xl sm:text-2xl font-bold mb-4 sm:mb-6">Contact Information</h3>
+              <h3 className="font-playfair text-xl sm:text-2xl font-bold mb-4 sm:mb-6">學歷 / Education</h3>
+              <p className="text-gray-300 mb-6 sm:mb-8 leading-relaxed text-base sm:text-lg">
+                2000 英國倫敦大學巴特雷學院建築碩士<br />
+                1996 淡江大學建築學士<br />
+                1991 臺北市建國中學
+              </p>
+            </div>
+            <div>
+              <h3 className="font-playfair text-xl sm:text-2xl font-bold mb-4 sm:mb-6">國際榮譽 / Awards</h3>
               <p className="text-gray-300 leading-relaxed text-base sm:text-lg">
-                Tel: +86 21 5888 8888<br />
-                Email: contact@justarchi-design.com<br />
-                Working Hours: Mon-Fri 9:00-18:00
+                2010 上海世博會阿曼國家館國際招標第二名<br />
+                日本JCD設計大賞<br />
+                湖南株洲天元區政中心招標首獎<br />
+                揚州京華城招標第一名<br />
+                2019 淡江大學建築系傑出系友
               </p>
             </div>
             <div>
-              <h3 className="font-playfair text-xl sm:text-2xl font-bold mb-4 sm:mb-6">Social Media</h3>
+              <h3 className="font-playfair text-xl sm:text-2xl font-bold mb-4 sm:mb-6">聯繫方式 / Contact</h3>
               <div className="flex gap-6">
                 <a href="#" className="text-white hover:text-gray-300 transition-colors">
                   <i className="fab fa-weixin text-2xl sm:text-3xl"></i>
@@ -35,6 +46,9 @@ const Contact: React.FC = () => {
                 <a href="#" className="text-white hover:text-gray-300 transition-colors">
                   <i className="fab fa-linkedin text-2xl sm:text-3xl"></i>
                 </a>
+                <a href="mailto:leo@justarchi.com" className="text-white hover:text-gray-300 transition-colors">
+                  <i className="fas fa-envelope text-2xl sm:text-3xl"></i>
+                </a>
               </div>
             </div>
           </div>
@@ -42,14 +56,20 @@ const Contact: React.FC = () => {
             <div className="relative h-[300px] sm:h-[400px] md:h-[500px] overflow-hidden rounded-lg opacity-0 transition-opacity duration-800 ease-in-out">
               <img
                 src="https://ai-public.mastergo.com/ai/img_res/eead2060bab466c68e9e3ebbbbb77b6b.jpg"
-                alt="Office"
+                alt="Leo Weng Portrait"
                 className="w-full h-full object-cover object-center"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
             </div>
-            <button className="!rounded-button w-full bg-white text-black py-3 md:py-4 text-base md:text-lg font-medium hover:bg-gray-100 transition-colors duration-300">
-              Get in Touch <i className="fas fa-arrow-right ml-2" />
-            </button>
+            <div className="text-center space-y-4">
+              <p className="text-gray-300 text-sm leading-relaxed">
+                &ldquo;作品遍及海峽兩岸、香港、柬埔寨、泰國等地<br />
+                致力於創造融合傳統與現代的建築作品&rdquo;
+              </p>
+              <button className="!rounded-button w-full bg-white text-black py-3 md:py-4 text-base md:text-lg font-medium hover:bg-gray-100 transition-colors duration-300">
+                了解更多作品 <i className="fas fa-arrow-right ml-2" />
+              </button>
+            </div>
           </div>
         </div>
       </div>
