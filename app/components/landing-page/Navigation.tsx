@@ -7,11 +7,12 @@ interface NavItem {
 }
 
 const navItems: NavItem[] = [
-  { name: '關於', nameEn: 'About', id: 'about' },
-  { name: '設計理念', nameEn: 'Philosophy', id: 'core-values' },
+  { name: '關於我們', nameEn: 'About', id: 'about' },
   { name: '建築設計', nameEn: 'Architecture', id: 'architecture' },
   { name: '室內設計', nameEn: 'Interior', id: 'interior' },
   { name: '城市規劃', nameEn: 'Planning', id: 'planning' },
+  { name: '設計理念', nameEn: 'Philosophy', id: 'core-values' },
+  { name: '項目分佈', nameEn: 'Project Distribution', id: 'project-distribution' },
   { name: '聯繫', nameEn: 'Contact', id: 'contact-us' }
 ];
 
@@ -33,7 +34,7 @@ const Navigation: React.FC<NavigationProps> = ({ activeSection }) => {
     window.addEventListener('scroll', handleScroll);
     // 初始化时执行一次
     handleScroll();
-    
+
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -48,16 +49,14 @@ const Navigation: React.FC<NavigationProps> = ({ activeSection }) => {
   return (
     <header
       ref={headerRef}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-black/80 backdrop-blur-md' : 'bg-transparent'
-      }`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-black/80 backdrop-blur-md' : 'bg-transparent'
+        }`}
     >
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 h-20 flex items-center justify-between">
         <div className="flex items-center">
-          <div 
-            className={`font-playfair text-lg sm:text-xl font-bold text-white tracking-wider cursor-pointer relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:h-[2px] after:bg-white after:transition-all after:duration-300 ${
-              activeSection === 'home' ? 'after:w-full' : 'after:w-0 hover:after:w-full'
-            }`}
+          <div
+            className={`font-playfair text-lg sm:text-xl font-bold text-white tracking-wider cursor-pointer relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:h-[2px] after:bg-white after:transition-all after:duration-300 ${activeSection === 'home' ? 'after:w-full' : 'after:w-0 hover:after:w-full'
+              }`}
             onClick={() => scrollToSection('home')}
           >
             得體設計
@@ -72,9 +71,8 @@ const Navigation: React.FC<NavigationProps> = ({ activeSection }) => {
                   e.preventDefault();
                   scrollToSection(item.id);
                 }}
-                className={`text-white hover:text-gray-300 transition-all duration-300 text-xs lg:text-sm relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[2px] after:bg-white hover:after:w-full after:transition-all after:duration-300 ${
-                  activeSection === item.id ? 'after:w-full' : ''
-                }`}
+                className={`text-white hover:text-gray-300 transition-all duration-300 text-xs lg:text-sm relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[2px] after:bg-white hover:after:w-full after:transition-all after:duration-300 ${activeSection === item.id ? 'after:w-full' : ''
+                  }`}
               >
                 {item.name}
               </a>
@@ -83,7 +81,7 @@ const Navigation: React.FC<NavigationProps> = ({ activeSection }) => {
         </div>
 
         {/* 桌面联系按钮 */}
-        <button 
+        <button
           className="hidden md:block !rounded-button bg-white/10 border border-white/20 text-white px-4 py-2 text-sm font-medium hover:bg-white/20 transition-colors duration-300 whitespace-nowrap backdrop-blur-sm"
           onClick={() => scrollToSection('contact-us')}
         >
@@ -91,7 +89,7 @@ const Navigation: React.FC<NavigationProps> = ({ activeSection }) => {
         </button>
 
         {/* 移动端菜单按钮 */}
-        <button 
+        <button
           className="md:hidden text-white text-2xl p-2"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
         >
@@ -100,11 +98,10 @@ const Navigation: React.FC<NavigationProps> = ({ activeSection }) => {
       </div>
 
       {/* 移动端导航菜单 */}
-      <div className={`md:hidden fixed inset-0 bg-black/95 backdrop-blur-md z-50 transition-transform duration-300 transform ${
-        mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
-      }`}>
+      <div className={`md:hidden fixed inset-0 bg-black/95 backdrop-blur-md z-50 transition-transform duration-300 transform ${mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
+        }`}>
         <div className="flex justify-end p-6">
-          <button 
+          <button
             className="text-white text-2xl"
             onClick={() => setMobileMenuOpen(false)}
           >
@@ -135,7 +132,7 @@ const Navigation: React.FC<NavigationProps> = ({ activeSection }) => {
               {item.name}
             </a>
           ))}
-          <button 
+          <button
             className="mt-8 !rounded-button bg-white/10 border border-white/20 text-white px-8 py-3 text-lg font-medium hover:bg-white/20 transition-colors duration-300 whitespace-nowrap backdrop-blur-sm"
             onClick={() => scrollToSection('contact-us')}
           >

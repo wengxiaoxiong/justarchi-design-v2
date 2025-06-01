@@ -55,10 +55,10 @@ const App: React.FC = () => {
             {/* 导航栏 */}
             <Navigation activeSection={activeSection} />
             {/* 页面内容 */}
-            <Hero />
+            <Hero/>
             <About />
-            <CoreValues />
             <ArchitectureDesign />
+            <CoreValues />
             <ProjectDistribution />
             <Contact />
         </div>

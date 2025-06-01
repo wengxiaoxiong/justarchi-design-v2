@@ -10,7 +10,7 @@ const Contact: React.FC = () => {
             <div>
               <h3 className="font-playfair text-xl sm:text-2xl font-bold mb-4 sm:mb-6">創辦人 / Founder</h3>
               <p className="text-gray-300 mb-6 sm:mb-8 leading-relaxed text-base sm:text-lg">
-                翁紹珉（獅）/ Leo Weng<br />
+                翁獅/ Leo Weng<br />
                 得體設計建築師事務所 創辦人<br />
                 美國紐約州註冊建築師<br />
                 台灣註冊建築師

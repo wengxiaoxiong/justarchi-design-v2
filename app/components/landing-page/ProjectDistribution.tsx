@@ -27,7 +27,7 @@ const ProjectDistribution: React.FC = () => {
   const totalProjects = projectLocations.reduce((sum, location) => sum + location.projects, 0);
 
   return (
-    <section className="py-16 md:py-24 lg:py-32 bg-gray-900 text-white">
+    <section id="project-distribution" className="py-16 md:py-24 lg:py-32 bg-gray-900 text-white">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 md:px-8">
         {/* 标题 */}
         <div className="text-center mb-16 md:mb-20">
@@ -49,12 +49,12 @@ const ProjectDistribution: React.FC = () => {
             <div className="text-gray-400">完成項目</div>
           </div>
           <div className="text-center">
-            <div className="text-3xl md:text-4xl font-bold text-white mb-2">{projectLocations.length}</div>
-            <div className="text-gray-400">城市覆蓋</div>
+            <div className="text-3xl md:text-4xl font-bold text-white mb-2">5+</div>
+            <div className="text-gray-400">地區覆蓋</div>
           </div>
           <div className="text-center">
-            <div className="text-3xl md:text-4xl font-bold text-white mb-2">25+</div>
-            <div className="text-gray-400">設計獎項</div>
+            <div className="text-3xl md:text-4xl font-bold text-white mb-2">{projectLocations.length}</div>
+            <div className="text-gray-400">城市覆蓋</div>
           </div>
           <div className="text-center">
             <div className="text-3xl md:text-4xl font-bold text-white mb-2">20+</div>
@@ -63,46 +63,53 @@ const ProjectDistribution: React.FC = () => {
         </div>
 
         {/* 地理分布 */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          {/* 左侧地图占位 */}
-          <div className="relative">
-            <div className="aspect-square bg-gray-800 rounded-lg p-8 flex items-center justify-center">
-              <div className="text-center">
-                <i className="fas fa-map-marked-alt text-6xl text-gray-600 mb-4"></i>
-                <h4 className="text-xl font-semibold text-white mb-2">項目地理分佈</h4>
-                <p className="text-gray-400">橫跨亞洲多個重要城市</p>
-              </div>
+        <div className="mb-16">
+          <h4 className="text-xl font-semibold text-white mb-8 text-center">項目地理分布</h4>
+          
+          {/* 重點項目區域 */}
+          <div className="mb-12">
+            <h5 className="text-lg font-medium text-blue-400 mb-6">重點項目城市</h5>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {projectLocations.filter(location => location.featured).map((location) => (
+                <div 
+                  key={location.name}
+                  className="bg-gradient-to-br from-blue-500/20 to-blue-600/10 border border-blue-500/30 p-6 rounded-lg hover:from-blue-500/30 hover:to-blue-600/20 transition-all duration-300"
+                >
+                  <div className="flex justify-between items-start mb-3">
+                    <div>
+                      <h6 className="text-lg font-semibold text-white">{location.name}</h6>
+                      <p className="text-sm text-blue-300">{location.nameEn}</p>
+                    </div>
+                    <span className="bg-blue-500 text-white px-3 py-1 rounded-full text-xs font-medium">
+                      重點
+                    </span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <div className="text-2xl font-bold text-white">{location.projects}</div>
+                    <div className="text-sm text-gray-300">個項目</div>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
 
-          {/* 右侧城市列表 */}
+          {/* 其他項目區域 */}
           <div>
-            <h4 className="text-xl font-semibold text-white mb-6">主要項目城市</h4>
-            <div className="space-y-4">
-              {projectLocations.map((location) => (
+            <h5 className="text-lg font-medium text-gray-300 mb-6">其他項目</h5>
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+              {projectLocations.filter(location => !location.featured).map((location) => (
                 <div 
                   key={location.name}
-                  className={`flex justify-between items-center p-4 rounded-lg transition-all duration-300 ${
-                    location.featured 
-                      ? 'bg-blue-500/20 border border-blue-500/30' 
-                      : 'bg-gray-800/50 hover:bg-gray-700/50'
-                  }`}
+                  className="bg-gray-800/50 p-4 rounded-lg hover:bg-gray-700/50 transition-all duration-300 border border-gray-700/50"
                 >
-                  <div>
-                    <h5 className="font-medium text-white">{location.name}</h5>
-                    <p className="text-sm text-gray-400">{location.nameEn}</p>
-                  </div>
-                  <div className="text-right">
-                    <div className="text-lg font-semibold text-white">{location.projects}</div>
-                    <div className="text-xs text-gray-400">項目</div>
-                  </div>
-                  {location.featured && (
-                    <div className="ml-3">
-                      <span className="bg-blue-500 text-white px-2 py-1 rounded-full text-xs">
-                        重點
-                      </span>
+                  <div className="text-center">
+                    <h6 className="font-medium text-white mb-1">{location.name}</h6>
+                    <p className="text-xs text-gray-400 mb-2">{location.nameEn}</p>
+                    <div className="flex items-center justify-center gap-2">
+                      <span className="text-lg font-semibold text-white">{location.projects}</span>
+                      <span className="text-xs text-gray-400">項目</span>
                     </div>
-                  )}
+                  </div>
                 </div>
               ))}
             </div>
