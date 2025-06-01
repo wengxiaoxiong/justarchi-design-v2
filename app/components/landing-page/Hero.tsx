@@ -1,11 +1,22 @@
 import React from 'react';
 
 const Hero: React.FC = () => {
+  // 平滑滚动到指定section的函数
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+  };
+
   return (
     <section id="home" className="relative h-screen">
       <div className="absolute inset-0 overflow-hidden">
         <img
-          src="https://ai-public.mastergo.com/ai/img_res/57ddd066c3326a2c37bc90c0245a2e96.jpg"
+          src="https://haskngpqhwuomnpw.public.blob.vercel-storage.com/%E6%B1%9F%E5%B1%B1-X6lmEL6ax3hR1Mwvd3b7NJpjpzdOI4.jpg"
           alt="Hero Background"
           className="w-full h-full object-cover object-center transform scale-105 transition-transform duration-1000"
         />
@@ -23,10 +34,14 @@ const Hero: React.FC = () => {
             創辦人翁獅，致力於創造融合傳統與現代的建築作品。JUST蘊含公平、正義、恰當、剛剛好的多重意涵，體現中庸之道與至善狀態的價值取向。
           </p>
           <div className="flex flex-col sm:flex-row gap-4">
-            <button className="!rounded-button bg-white text-black px-4 sm:px-6 md:px-8 py-2 md:py-3 text-sm md:text-lg font-medium hover:bg-gray-100 transition-colors duration-300 whitespace-nowrap">
+            <button onClick={() => {
+              scrollToSection('about');
+            }} className="!rounded-button bg-white text-black px-4 sm:px-6 md:px-8 py-2 md:py-3 text-sm md:text-lg font-medium hover:bg-gray-100 transition-colors duration-300 whitespace-nowrap">
               了解更多 <i className="fas fa-arrow-right ml-2" />
             </button>
-            <button className="!rounded-button border border-white text-white px-4 sm:px-6 md:px-8 py-2 md:py-3 text-sm md:text-lg font-medium hover:bg-white hover:text-black transition-colors duration-300 whitespace-nowrap">
+            <button onClick={()=>{
+              scrollToSection('architecture');
+            }} className="!rounded-button border border-white text-white px-4 sm:px-6 md:px-8 py-2 md:py-3 text-sm md:text-lg font-medium hover:bg-white hover:text-black transition-colors duration-300 whitespace-nowrap">
               查看作品
             </button>
           </div>

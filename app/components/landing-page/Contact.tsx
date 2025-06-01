@@ -36,26 +36,31 @@ const Contact: React.FC = () => {
             </div>
             <div>
               <h3 className="font-playfair text-xl sm:text-2xl font-bold mb-4 sm:mb-6">聯繫方式 / Contact</h3>
-              <div className="flex gap-6">
-                <a href="#" className="text-white hover:text-gray-300 transition-colors">
+
+              <div className="space-y-4">
+                <div className="flex items-center gap-4">
                   <i className="fab fa-weixin text-2xl sm:text-3xl"></i>
-                </a>
-                <a href="#" className="text-white hover:text-gray-300 transition-colors">
-                  <i className="fab fa-weibo text-2xl sm:text-3xl"></i>
-                </a>
-                <a href="#" className="text-white hover:text-gray-300 transition-colors">
-                  <i className="fab fa-linkedin text-2xl sm:text-3xl"></i>
-                </a>
-                <a href="mailto:leo@justarchi.com" className="text-white hover:text-gray-300 transition-colors">
+                  <span>微信号：wslion1973</span>
+                </div>
+                <div className="flex items-center gap-4">
+                  <i className="fas fa-phone text-2xl sm:text-3xl"></i>
+                  <span>电话：+886 0968608537</span>
+                </div>
+                <div className="flex items-center gap-4">
+                  <i className="fab fa-line text-2xl sm:text-3xl"></i>
+                  <span>LINE号：poohlion</span>
+                </div>
+                <div className="flex items-center gap-4">
                   <i className="fas fa-envelope text-2xl sm:text-3xl"></i>
-                </a>
+                  <span>邮箱：wengshih@gmail.com</span>
+                </div>
               </div>
             </div>
           </div>
           <div className="space-y-6 md:space-y-8">
             <div className="relative h-[300px] sm:h-[400px] md:h-[500px] overflow-hidden rounded-lg opacity-0 transition-opacity duration-800 ease-in-out">
               <img
-                src="https://ai-public.mastergo.com/ai/img_res/eead2060bab466c68e9e3ebbbbb77b6b.jpg"
+                src="https://haskngpqhwuomnpw.public.blob.vercel-storage.com/%E6%B1%9F%E5%B1%B1-X6lmEL6ax3hR1Mwvd3b7NJpjpzdOI4.jpg"
                 alt="Leo Weng Portrait"
                 className="w-full h-full object-cover object-center"
               />
