@@ -13,3 +13,61 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+
+
+model Project {
+  id          String   @id @default(cuid())
+  title       String
+  description String?
+  category    ProjectCategory
+  
+  // 基础展示信息
+  coverImage  String   // 主图片
+  images      String[] // 多张图片URL数组
+  year        Int?     // 项目年份
+  
+  // 位置信息 (简化)
+  location    String   // 位置描述
+  city        String?
+  // 项目信息
+  client      String?
+  architect   String?
+  area        String?  // 面积描述 (如: "2,500㎡")
+  status      ProjectStatus @default(COMPLETED)
+  
+  // 详细内容 (用于详情页)
+  brief       String?  @db.Text // 项目简介
+  concept     String?  @db.Text // 设计理念
+  features    String[] // 项目特色要点
+  tags        String[] // 标签
+  
+  // 状态管理
+  isPublished Boolean  @default(true)  // 是否发布
+  isFeatured  Boolean  @default(false) // 是否精选
+  sortOrder   Int      @default(0)     // 排序顺序
+  
+  // 时间戳
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  @@map("projects")
+  @@index([category, isFeatured])
+  @@index([isPublished, sortOrder])
+}
+
+enum ProjectCategory {
+  ARCHITECTURE
+  INTERIOR
+  PLANNING
+  LANDSCAPE
+  URBAN_DESIGN
+  RESEARCH
+}
+
+enum ProjectStatus {
+  COMPLETED
+  IN_PROGRESS
+  CONCEPT
+  AWARDED
+}
