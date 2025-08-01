@@ -25,9 +25,8 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // 检查文件大小 (20MB限制，因为我们会压缩)
     const contentLength = request.headers.get('content-length')
-    if (contentLength && parseInt(contentLength) > 20 * 1024 * 1024) {
+    if (contentLength && parseInt(contentLength) > 5 * 1024 * 1024) {
       return NextResponse.json(
         { error: '文件大小不能超过20MB' },
         { status: 400 }
