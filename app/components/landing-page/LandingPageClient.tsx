@@ -59,6 +59,11 @@ const LandingPageClient: React.FC<LandingPageClientProps> = ({
         };
         
         ensureViewportMeta();
+
+
+        console.log(  architectureProjects,
+            interiorProjects,
+            planningProjects);
     }, []);
 
     return (

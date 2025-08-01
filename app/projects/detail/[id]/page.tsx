@@ -4,8 +4,8 @@ import Link from 'next/link';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import rehypeSanitize from 'rehype-sanitize';
-import { prisma } from '../../../lib/db';
-import { ProjectCategory, ProjectStatus } from '../../../lib/types';
+import { prisma } from '../../../../lib/db';
+import { ProjectCategory, ProjectStatus } from '../../../../lib/types';
 
 interface ProjectDetailPageProps {
   params: Promise<{ id: string }>;
@@ -151,7 +151,7 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
                     <ReactMarkdown
                       remarkPlugins={[remarkGfm]}
                       rehypePlugins={[rehypeSanitize]}
-                      className="text-gray-700 leading-relaxed"
+                      // className="text-gray-700 leading-relaxed
                     >
                       {project.description}
                     </ReactMarkdown>
@@ -293,7 +293,7 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
                   {relatedProjects.map((relatedProject) => (
                     <Link
                       key={relatedProject.id}
-                      href={`/projects/${relatedProject.id}`}
+                      href={`/projects/detail/${relatedProject.id}`}
                       className="block group"
                     >
                       <div className="flex space-x-3">

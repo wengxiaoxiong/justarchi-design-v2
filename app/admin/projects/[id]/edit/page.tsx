@@ -1,10 +1,10 @@
 'use client'
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { ProjectCategory, ProjectStatus } from '../../../../lib/types';
-import { createProject, type ProjectFormData } from '../../../../lib/actions';
+import { ProjectCategory, ProjectStatus } from '../../../../../lib/types';
+import { getProjectById, updateProject, type ProjectFormData } from '../../../../../lib/actions';
 
 // 项目类型选项
 const categoryOptions = [
@@ -29,9 +29,10 @@ interface LocalProjectFormData extends Omit<ProjectFormData, 'year'> {
   year: number | '';
 }
 
-export default function NewProjectPage() {
+export default function EditProjectPage({ params }: { params: Promise<{ id: string }> }) {
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   
   const [formData, setFormData] = useState<LocalProjectFormData>({
     title: '',
@@ -54,6 +55,51 @@ export default function NewProjectPage() {
     isFeatured: false,
     sortOrder: 0,
   });
+
+  // 加载项目数据
+  useEffect(() => {
+    const loadProject = async () => {
+      try {
+        const resolvedParams = await params;
+        const result = await getProjectById(resolvedParams.id);
+        
+        if (result.success && result.project) {
+          const project = result.project;
+          setFormData({
+            title: project.title || '',
+            description: project.description || '',
+            category: project.category || ProjectCategory.ARCHITECTURE,
+            coverImage: project.coverImage || '',
+            images: project.images && project.images.length > 0 ? project.images : [''],
+            year: project.year || '',
+            location: project.location || '',
+            city: project.city || '',
+            client: project.client || '',
+            architect: project.architect || 'JustArchi Design',
+            area: project.area || '',
+            status: project.status || ProjectStatus.CONCEPT,
+            brief: project.brief || '',
+            concept: project.concept || '',
+            features: project.features && project.features.length > 0 ? project.features : [''],
+            tags: project.tags && project.tags.length > 0 ? project.tags : [''],
+            isPublished: project.isPublished ?? true,
+            isFeatured: project.isFeatured ?? false,
+            sortOrder: project.sortOrder || 0,
+          });
+        } else {
+          alert(result.error || '项目不存在或加载失败');
+          router.push('/admin');
+        }
+      } catch (error) {
+        console.error('加载项目失败:', error);
+        alert('加载项目失败，请稍后重试');
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    loadProject();
+  }, [params, router]);
 
   const handleInputChange = (field: keyof LocalProjectFormData, value: LocalProjectFormData[keyof LocalProjectFormData]) => {
     setFormData(prev => ({
@@ -101,20 +147,32 @@ export default function NewProjectPage() {
         concept: formData.concept || undefined,
       };
 
-      const result = await createProject(submitData);
+      const resolvedParams = await params;
+      const result = await updateProject(resolvedParams.id, submitData);
 
       if (result.success) {
         router.push('/admin');
       } else {
-        alert(`创建失败: ${result.error}`);
+        alert(`更新失败: ${result.error}`);
       }
     } catch (error) {
-      console.error('创建项目失败:', error);
-      alert('创建失败，请稍后重试');
+      console.error('更新项目失败:', error);
+      alert('更新失败，请稍后重试');
     } finally {
       setIsSubmitting(false);
     }
   };
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
+          <p className="mt-4 text-gray-600">加载中...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -127,7 +185,7 @@ export default function NewProjectPage() {
                 ← 返回管理后台
               </Link>
             </div>
-            <h1 className="text-xl font-semibold text-gray-900">新建项目</h1>
+            <h1 className="text-xl font-semibold text-gray-900">编辑项目</h1>
             <div></div>
           </div>
         </div>
@@ -495,7 +553,7 @@ export default function NewProjectPage() {
               disabled={isSubmitting}
               className="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:opacity-50 transition-colors"
             >
-              {isSubmitting ? '创建中...' : '创建项目'}
+              {isSubmitting ? '更新中...' : '更新项目'}
             </button>
           </div>
         </form>

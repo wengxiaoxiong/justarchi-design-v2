@@ -1,5 +1,6 @@
 
-import { PrismaClient, ProjectCategory, ProjectStatus } from '../lib/generated/prisma';
+import { ProjectCategory, ProjectStatus } from '@/lib/types';
+import { PrismaClient,  } from '../lib/generated/prisma';
 
 const prisma = new PrismaClient();
 

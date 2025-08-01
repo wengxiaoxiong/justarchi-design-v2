@@ -19,5 +19,15 @@ export {
   getPlanningProjectById,
 } from './planning';
 
+// 管理员相关 Actions
+export {
+  getProjectById,
+  getAllProjects,
+  createProject,
+  updateProject,
+  deleteProject,
+} from './admin';
+
 // 类型导出
-export type { ArchitectureProject } from '../types'; 
+export type { ArchitectureProject } from '../types';
+export type { ProjectFormData } from './admin'; 

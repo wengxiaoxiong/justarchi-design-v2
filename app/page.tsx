@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { 
   getArchitectureIndexProjects,
@@ -15,6 +15,7 @@ const App: React.FC = async () => {
     getPlanningIndexProjects()
   ]);
 
+  
   return (
     <LandingPageClient 
       architectureProjects={architectureProjects}
