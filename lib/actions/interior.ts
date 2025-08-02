@@ -1,42 +1,82 @@
 'use server';
 
-import { ArchitectureProject } from '../types';
-import { interiorProjects } from '../data/projects';
+import { prisma } from '../db'
+import { ProjectCategory, type Project, type ArchitectureProject } from '../types'
 
-/**
- * 获取室内设计首页展示项目（前2个）
- */
+// 获取首页展示的室内设计项目
 export async function getInteriorIndexProjects(): Promise<ArchitectureProject[]> {
-  try {
-    // 返回前2个项目作为首页展示
-    return interiorProjects.slice(0, 2);
-  } catch (error) {
-    console.error('获取室内设计首页项目失败:', error);
-    return [];
-  }
+  const projects = await prisma.project.findMany({
+    where: {
+      category: ProjectCategory.INTERIOR,
+      isPublished: true,
+    },
+    orderBy: [
+      { isFeatured: 'desc' },
+      { sortOrder: 'asc' },
+      { createdAt: 'desc' }
+    ],
+    take: 6,
+  })
+
+  return projects.map(transformToArchitectureProject)
 }
 
-/**
- * 获取所有室内设计项目
- */
+// 获取所有室内设计项目
 export async function getAllInteriorProjects(): Promise<ArchitectureProject[]> {
-  try {
-    return interiorProjects;
-  } catch (error) {
-    console.error('获取所有室内设计项目失败:', error);
-    return [];
+  const projects = await prisma.project.findMany({
+    where: {
+      category: ProjectCategory.INTERIOR,
+      isPublished: true,
+    },
+    orderBy: [
+      { isFeatured: 'desc' },
+      { sortOrder: 'asc' },
+      { createdAt: 'desc' }
+    ],
+  })
+
+  return projects.map(transformToArchitectureProject)
+}
+
+// 根据ID获取室内设计项目详情
+export async function getInteriorProjectById(id: string): Promise<Project | null> {
+  const project = await prisma.project.findFirst({
+    where: {
+      id,
+      category: ProjectCategory.INTERIOR,
+      isPublished: true,
+    },
+  })
+
+  return project
+}
+
+// 转换数据库项目为前端展示格式
+function transformToArchitectureProject(project: Project): ArchitectureProject {
+  return {
+    id: project.id,
+    title: project.title,
+    location: project.location,
+    image: project.coverImage,
+    className: getProjectClassName(project),
+    category: 'interior',
+    description: project.description || undefined,
+    year: project.year?.toString(),
+    area: project.area || undefined,
+    client: project.client || undefined,
+    status: project.status.toString(),
   }
 }
 
-/**
- * 根据ID获取单个室内设计项目
- */
-export async function getInteriorProjectById(id: string): Promise<ArchitectureProject | null> {
-  try {
-    const project = interiorProjects.find(p => p.id === id);
-    return project || null;
-  } catch (error) {
-    console.error('获取室内设计项目详情失败:', error);
-    return null;
-  }
+// 根据项目索引生成对应的CSS类名
+function getProjectClassName(project: Project): string {
+  const classNames = [
+    'col-span-12 md:col-span-6 opacity-0 transition-opacity duration-800 ease-in-out',
+    'col-span-12 md:col-span-6 opacity-0 transition-opacity duration-800 ease-in-out',
+    'col-span-12 sm:col-span-6 md:col-span-4 opacity-0 transition-opacity duration-800 ease-in-out',
+    'col-span-12 sm:col-span-6 md:col-span-4 opacity-0 transition-opacity duration-800 ease-in-out',
+  ]
+  
+  const index = parseInt(project.id.slice(-1)) || 0
+  return classNames[index % classNames.length]
 } 
