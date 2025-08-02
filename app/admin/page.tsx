@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react';
 import Link from 'next/link';
 import { ProjectCategory, ProjectStatus } from '../../lib/types';
@@ -43,9 +44,9 @@ async function getStats() {
   const projects = result.projects || [];
   return {
     total: projects.length,
-    published: projects.filter(p => p.isPublished).length,
-    featured: projects.filter(p => p.isFeatured).length,
-    draft: projects.filter(p => !p.isPublished).length,
+    published: projects.filter((p: { isPublished: any; }) => p.isPublished).length,
+    featured: projects.filter((p: { isFeatured: any; }) => p.isFeatured).length,
+    draft: projects.filter((p: { isPublished: any; }) => !p.isPublished).length,
   };
 }
 

@@ -1,4 +1,4 @@
-import { ProjectCategory, ProjectStatus } from './generated/prisma'
+import { ProjectCategory, ProjectStatus } from '@prisma/client'
 
 export interface Project {
   id: string;
@@ -53,4 +53,4 @@ export interface ArchitectureProject {
 }
 
 // 导出 Prisma 生成的枚举类型
-export { ProjectCategory, ProjectStatus } from './generated/prisma' 
+export { ProjectCategory, ProjectStatus } from '@prisma/client' 

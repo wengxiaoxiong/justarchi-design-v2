@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { ProjectCategory, ProjectStatus } from '../../lib/types';
 import { deleteProject } from '../../lib/actions';
-import { Project } from '../../lib/generated/prisma';
+import { Project } from '@prisma/client';
 
 interface AdminProjectListProps {
   projects: Project[];

@@ -2,7 +2,7 @@
 
 import { prisma } from '../db';
 import { ProjectCategory, ProjectStatus } from '../types';
-import { Prisma } from '../generated/prisma';
+import { Prisma } from '@prisma/client';
 import { revalidatePath } from 'next/cache';
 
 // 项目表单数据类型

@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "prisma generate && next build",
     "start": "next start",
     "lint": "next lint",
     "db:seed": "tsx scripts/seed.ts",
@@ -29,6 +29,7 @@
     "rehype-highlight": "^7.0.2",
     "rehype-sanitize": "^6.0.0",
     "remark-gfm": "^4.0.1",
+    "sharp": "^0.34.3",
     "tailwind-merge": "^3.3.1",
     "topojson-client": "^3.1.0",
     "tsx": "^4.20.3"
