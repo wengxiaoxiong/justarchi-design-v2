@@ -2,10 +2,12 @@
 
 import { ProjectForm } from '@/app/components/admin/ProjectForm';
 import { useRouter } from 'next/navigation';
+import { use } from 'react';
 
 
-export default function EditProjectPage({ params }: { params: { id: string } }) {
+export default function EditProjectPage({ params }: { params: Promise<{ id: string }> }) {
   const router = useRouter();
+  const { id } = use(params);
 
   const handleSuccess = () => {
         router.push('/admin');
@@ -14,7 +16,7 @@ export default function EditProjectPage({ params }: { params: { id: string } }) 
   return (
     <ProjectForm 
       mode="edit" 
-      projectId={params.id}
+      projectId={id}
       onSuccess={handleSuccess} 
     />
   );
