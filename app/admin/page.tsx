@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react';
 import Link from 'next/link';
-import { ProjectCategory, ProjectStatus } from '../../lib/types';
+import { ProjectCategory } from '../../lib/types';
 import { getAllProjects } from '../../lib/actions';
 import AdminProjectList from './AdminProjectList';
 
@@ -15,13 +15,6 @@ const categoryMap: Record<ProjectCategory, string> = {
   [ProjectCategory.RESEARCH]: '研究项目',
 };
 
-// 项目状态映射
-const statusMap: Record<ProjectStatus, string> = {
-  [ProjectStatus.COMPLETED]: '已完成',
-  [ProjectStatus.IN_PROGRESS]: '进行中',
-  [ProjectStatus.CONCEPT]: '概念阶段',
-  [ProjectStatus.AWARDED]: '获奖项目',
-};
 
 // 获取所有项目（包括未发布的）
 async function getAdminProjects() {
@@ -174,7 +167,6 @@ export default async function AdminPage() {
         <AdminProjectList 
           projects={projects} 
           categoryMap={categoryMap} 
-          statusMap={statusMap} 
         />
       </div>
     </div>

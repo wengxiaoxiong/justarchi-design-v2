@@ -1,7 +1,7 @@
 'use server'
 
 import { prisma } from '../db';
-import { ProjectCategory, ProjectStatus } from '../types';
+import { ProjectCategory } from '../types';
 import { Prisma } from '@prisma/client';
 import { revalidatePath } from 'next/cache';
 
@@ -16,13 +16,8 @@ interface ProjectFormData {
   location: string;
   city?: string;
   client?: string;
-  architect?: string;
   area?: string;
-  status: ProjectStatus;
   brief?: string;
-  concept?: string;
-  features: string[];
-  tags: string[];
   isPublished: boolean;
   isFeatured: boolean;
   sortOrder: number;
@@ -52,7 +47,6 @@ export async function getProjectById(id: string) {
 // 获取所有项目（管理员视图）
 export async function getAllProjects(filters?: {
   category?: ProjectCategory;
-  status?: ProjectStatus;
   published?: boolean;
 }) {
   try {
@@ -62,9 +56,6 @@ export async function getAllProjects(filters?: {
       where.category = filters.category;
     }
     
-    if (filters?.status) {
-      where.status = filters.status;
-    }
     
     if (filters?.published !== undefined) {
       where.isPublished = filters.published;
@@ -99,8 +90,6 @@ export async function createProject(formData: ProjectFormData) {
 
     // 过滤空值
     const cleanImages = formData.images.filter(img => img.trim() !== '');
-    const cleanFeatures = formData.features.filter(feature => feature.trim() !== '');
-    const cleanTags = formData.tags.filter(tag => tag.trim() !== '');
 
     const project = await prisma.project.create({
       data: {
@@ -113,13 +102,8 @@ export async function createProject(formData: ProjectFormData) {
         location: formData.location,
         city: formData.city || null,
         client: formData.client || null,
-        architect: formData.architect || null,
         area: formData.area || null,
-        status: formData.status,
         brief: formData.brief || null,
-        concept: formData.concept || null,
-        features: cleanFeatures,
-        tags: cleanTags,
         isPublished: formData.isPublished,
         isFeatured: formData.isFeatured,
         sortOrder: formData.sortOrder,
@@ -155,8 +139,6 @@ export async function updateProject(id: string, formData: ProjectFormData) {
 
     // 过滤空值
     const cleanImages = formData.images.filter(img => img.trim() !== '');
-    const cleanFeatures = formData.features.filter(feature => feature.trim() !== '');
-    const cleanTags = formData.tags.filter(tag => tag.trim() !== '');
 
     const project = await prisma.project.update({
       where: { id },
@@ -170,13 +152,8 @@ export async function updateProject(id: string, formData: ProjectFormData) {
         location: formData.location,
         city: formData.city || null,
         client: formData.client || null,
-        architect: formData.architect || null,
         area: formData.area || null,
-        status: formData.status,
         brief: formData.brief || null,
-        concept: formData.concept || null,
-        features: cleanFeatures,
-        tags: cleanTags,
         isPublished: formData.isPublished,
         isFeatured: formData.isFeatured,
         sortOrder: formData.sortOrder,

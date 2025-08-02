@@ -2,9 +2,10 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { ProjectCategory, ProjectStatus } from '../../../lib/types';
+import { ProjectCategory } from '../../../lib/types';
 import { createProject, updateProject, getProjectById, type ProjectFormData } from '../../../lib/actions';
 import { MultiImageUpload } from './MultiImageUpload';
+import { SingleImageUpload } from './SingleImageUpload';
 
 // 项目类型选项
 const categoryOptions = [
@@ -16,13 +17,6 @@ const categoryOptions = [
   { value: ProjectCategory.RESEARCH, label: '研究项目' },
 ];
 
-// 项目状态选项
-const statusOptions = [
-  { value: ProjectStatus.CONCEPT, label: '概念阶段' },
-  { value: ProjectStatus.IN_PROGRESS, label: '进行中' },
-  { value: ProjectStatus.COMPLETED, label: '已完成' },
-  { value: ProjectStatus.AWARDED, label: '获奖项目' },
-];
 
 // 使用从 actions 导入的 ProjectFormData 类型，但添加年份可以为空字符串的本地接口
 interface LocalProjectFormData extends Omit<ProjectFormData, 'year'> {
@@ -49,13 +43,8 @@ export function ProjectForm({ mode, projectId, onSuccess }: ProjectFormProps) {
     location: '',
     city: '',
     client: '',
-    architect: 'JustArchi Design',
     area: '',
-    status: ProjectStatus.CONCEPT,
     brief: '',
-    concept: '',
-    features: [''],
-    tags: [''],
     isPublished: true,
     isFeatured: false,
     sortOrder: 0,
@@ -80,13 +69,8 @@ export function ProjectForm({ mode, projectId, onSuccess }: ProjectFormProps) {
               location: project.location || '',
               city: project.city || '',
               client: project.client || '',
-              architect: project.architect || 'JustArchi Design',
               area: project.area || '',
-              status: project.status || ProjectStatus.CONCEPT,
               brief: project.brief || '',
-              concept: project.concept || '',
-              features: project.features && project.features.length > 0 ? project.features : [''],
-              tags: project.tags && project.tags.length > 0 ? project.tags : [''],
               isPublished: project.isPublished ?? true,
               isFeatured: project.isFeatured ?? false,
               sortOrder: project.sortOrder || 0,
@@ -114,26 +98,6 @@ export function ProjectForm({ mode, projectId, onSuccess }: ProjectFormProps) {
     }));
   };
 
-  const handleArrayChange = (field: 'features' | 'tags', index: number, value: string) => {
-    setFormData(prev => ({
-      ...prev,
-      [field]: prev[field].map((item, i) => i === index ? value : item)
-    }));
-  };
-
-  const addArrayItem = (field: 'features' | 'tags') => {
-    setFormData(prev => ({
-      ...prev,
-      [field]: [...prev[field], '']
-    }));
-  };
-
-  const removeArrayItem = (field: 'features' | 'tags', index: number) => {
-    setFormData(prev => ({
-      ...prev,
-      [field]: prev[field].filter((_, i) => i !== index)
-    }));
-  };
 
   const handleImagesChange = (urls: string[]) => {
     setFormData(prev => ({
@@ -161,10 +125,8 @@ export function ProjectForm({ mode, projectId, onSuccess }: ProjectFormProps) {
         description: formData.description || undefined,
         city: formData.city || undefined,
         client: formData.client || undefined,
-        architect: formData.architect || undefined,
         area: formData.area || undefined,
         brief: formData.brief || undefined,
-        concept: formData.concept || undefined,
       };
 
       let result;
@@ -256,22 +218,6 @@ export function ProjectForm({ mode, projectId, onSuccess }: ProjectFormProps) {
                 </select>
               </div>
 
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  项目状态
-                </label>
-                <select
-                  value={formData.status}
-                  onChange={(e) => handleInputChange('status', e.target.value as ProjectStatus)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                >
-                  {statusOptions.map(option => (
-                    <option key={option.value} value={option.value}>
-                      {option.label}
-                    </option>
-                  ))}
-                </select>
-              </div>
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -341,18 +287,6 @@ export function ProjectForm({ mode, projectId, onSuccess }: ProjectFormProps) {
                 />
               </div>
 
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  建筑师/设计师
-                </label>
-                <input
-                  type="text"
-                  value={formData.architect}
-                  onChange={(e) => handleInputChange('architect', e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  placeholder="如：JustArchi Design"
-                />
-              </div>
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -391,13 +325,11 @@ export function ProjectForm({ mode, projectId, onSuccess }: ProjectFormProps) {
                 <label className="block text-sm font-medium text-gray-700 mb-2">
                   封面图片 *
                 </label>
-                <input
-                  type="url"
-                  required
+                <SingleImageUpload
                   value={formData.coverImage}
-                  onChange={(e) => handleInputChange('coverImage', e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  placeholder="请输入图片URL"
+                  onChange={(url) => handleInputChange('coverImage', url)}
+                  placeholder="点击上传封面图片或拖拽图片到此处"
+                  maxSize={10}
                 />
               </div>
 
@@ -465,84 +397,8 @@ export function ProjectForm({ mode, projectId, onSuccess }: ProjectFormProps) {
                 />
               </div>
 
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  设计理念
-                </label>
-                <textarea
-                  value={formData.concept}
-                  onChange={(e) => handleInputChange('concept', e.target.value)}
-                  rows={4}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  placeholder="阐述设计理念和创作思路，支持Markdown格式"
-                />
-              </div>
 
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  项目特色
-                </label>
-                {formData.features.map((feature, index) => (
-                  <div key={index} className="flex items-center mb-3">
-                    <input
-                      type="text"
-                      value={feature}
-                      onChange={(e) => handleArrayChange('features', index, e.target.value)}
-                      className="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                      placeholder="输入项目特色点"
-                    />
-                    {formData.features.length > 1 && (
-                      <button
-                        type="button"
-                        onClick={() => removeArrayItem('features', index)}
-                        className="ml-3 text-red-600 hover:text-red-800"
-                      >
-                        删除
-                      </button>
-                    )}
-                  </div>
-                ))}
-                <button
-                  type="button"
-                  onClick={() => addArrayItem('features')}
-                  className="mt-3 text-blue-600 hover:text-blue-800 text-sm font-medium"
-                >
-                  + 添加特色
-                </button>
-              </div>
 
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  项目标签
-                </label>
-                {formData.tags.map((tag, index) => (
-                  <div key={index} className="flex items-center mb-3">
-                    <input
-                      type="text"
-                      value={tag}
-                      onChange={(e) => handleArrayChange('tags', index, e.target.value)}
-                      className="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                      placeholder="输入项目标签"
-                    />
-                    {formData.tags.length > 1 && (
-                      <button
-                        type="button"
-                        onClick={() => removeArrayItem('tags', index)}
-                        className="ml-3 text-red-600 hover:text-red-800"
-                      >
-                        删除
-                      </button>
-                    )}
-                  </div>
-                ))}
-                <button
-                  type="button"
-                  onClick={() => addArrayItem('tags')}
-                  className="mt-3 text-blue-600 hover:text-blue-800 text-sm font-medium"
-                >
-                  + 添加标签
-                </button>
-              </div>
             </div>
           </div>
 

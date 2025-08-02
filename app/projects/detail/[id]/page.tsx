@@ -1,11 +1,17 @@
-import React from 'react';
+'use client';
+
+import React, { useEffect } from 'react';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import rehypeSanitize from 'rehype-sanitize';
 import { prisma } from '../../../../lib/db';
-import { ProjectCategory, ProjectStatus } from '../../../../lib/types';
+import { ProjectCategory } from '../../../../lib/types';
+import Navigation from '../../../components/landing-page/Navigation';
+import MarkdownRenderer from '../../../components/MarkdownRenderer';
+import useActiveSection from '../../../hooks/useActiveSection';
+import useScrollAnimation from '../../../hooks/useScrollAnimation';
 
 interface ProjectDetailPageProps {
   params: Promise<{ id: string }>;
@@ -41,13 +47,6 @@ async function getRelatedProjects(currentProjectId: string, category: ProjectCat
   return projects;
 }
 
-// 项目状态映射
-const statusMap: Record<ProjectStatus, string> = {
-  [ProjectStatus.COMPLETED]: '已完成',
-  [ProjectStatus.IN_PROGRESS]: '进行中',
-  [ProjectStatus.CONCEPT]: '概念阶段',
-  [ProjectStatus.AWARDED]: '获奖项目',
-};
 
 // 项目类型映射
 const categoryMap: Record<ProjectCategory, string> = {
@@ -59,6 +58,169 @@ const categoryMap: Record<ProjectCategory, string> = {
   [ProjectCategory.RESEARCH]: '研究项目',
 };
 
+function ProjectDetailPageClient({ project, relatedProjects }: { project: any; relatedProjects: any[] }) {
+  const activeSection = useActiveSection({
+    sections: ['home', 'about', 'core-values', 'architecture', 'interior', 'planning', 'contact-us']
+  });
+  
+  useScrollAnimation();
+
+  return (
+    <div className="min-h-screen bg-black text-white">
+      {/* 导航栏 */}
+      <Navigation activeSection={activeSection} />
+
+      {/* 主要内容 */}
+      <main className="pt-20">
+        {/* 返回按钮 */}
+        <div className="fixed top-24 left-6 z-40">
+          <Link 
+            href="/" 
+            className="group flex items-center text-white/60 hover:text-white transition-all duration-300 bg-black/50 backdrop-blur-sm px-4 py-2 rounded-full border border-white/10"
+          >
+            <svg 
+              className="w-4 h-4 mr-2 transform group-hover:-translate-x-1 transition-transform duration-300" 
+              fill="none" 
+              stroke="currentColor" 
+              viewBox="0 0 24 24"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 19l-7-7 7-7" />
+            </svg>
+            <span className="font-light tracking-wide text-sm">Back</span>
+          </Link>
+        </div>
+
+        {/* 项目标题区域 */}
+        <section className="relative h-screen flex items-center justify-center overflow-hidden">
+          <div className="absolute inset-0 z-0">
+            <img
+              src={project.coverImage}
+              alt={project.title}
+              className="w-full h-full object-cover opacity-40"
+            />
+            <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/80"></div>
+          </div>
+          
+          <div className="relative z-10 text-center max-w-5xl mx-auto px-6 fade-in-up">
+            <div className="mb-6">
+              <span className="inline-block text-sm tracking-[0.3em] text-white/60 font-light uppercase mb-4">
+                {categoryMap[project.category]}
+              </span>
+              {project.isFeatured && (
+                <div className="inline-block ml-4">
+                  <span className="text-xs tracking-wider text-white/40 border border-white/20 px-3 py-1 rounded-full">
+                    FEATURED
+                  </span>
+                </div>
+              )}
+            </div>
+            
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-playfair font-light leading-none mb-8 tracking-tight">
+              {project.title}
+            </h1>
+            
+            <div className="flex flex-wrap justify-center items-center gap-8 text-white/70 font-light text-sm tracking-wide">
+              <div className="flex items-center">
+                <span className="mr-2 opacity-60">📍</span>
+                {project.location}
+              </div>
+              
+              {project.year && (
+                <div className="flex items-center">
+                  <span className="mr-2 opacity-60">📅</span>
+                  {project.year}
+                </div>
+              )}
+
+              {project.area && (
+                <div className="flex items-center">
+                  <span className="mr-2 opacity-60">📐</span>
+                  {project.area}
+                </div>
+              )}
+            </div>
+          </div>
+        </section>
+
+        {/* 项目描述 */}
+        {project.description && (
+          <section className="py-20 lg:py-32">
+            <div className="max-w-4xl mx-auto px-6 lg:px-8">
+              <div className="fade-in-up">
+                <h2 className="text-2xl md:text-3xl font-playfair font-light mb-12 text-center tracking-wide">
+                  Project Overview
+                </h2>
+                <div className="prose prose-invert prose-lg max-w-none font-playfair">
+                  <MarkdownRenderer content={project.description} />
+                </div>
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* 项目图片集 */}
+        {project.images.length > 1 && (
+          <section className="py-20">
+            <div className="max-w-6xl mx-auto px-6 lg:px-8">
+              <div className="space-y-20">
+                {project.images.slice(1).map((image, index) => (
+                  <div key={index} className="opacity-0 fade-in-up group" style={{ animationDelay: `${index * 0.2}s` }}>
+                    <div className="relative overflow-hidden">
+                      <img
+                        src={image}
+                        alt={`${project.title} - Image ${index + 2}`}
+                        className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105"
+                      />
+                      <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* 相关项目 */}
+        {relatedProjects.length > 0 && (
+          <section className="py-20 lg:py-32 border-t border-white/10">
+            <div className="max-w-6xl mx-auto px-6 lg:px-8">
+              <div className="fade-in-up">
+                <h2 className="text-2xl md:text-3xl font-playfair font-light mb-16 text-center tracking-wide">
+                  Related Projects
+                </h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                  {relatedProjects.map((relatedProject) => (
+                    <Link
+                      key={relatedProject.id}
+                      href={`/projects/detail/${relatedProject.id}`}
+                      className="group block"
+                    >
+                      <div className="relative overflow-hidden mb-4">
+                        <img
+                          src={relatedProject.coverImage}
+                          alt={relatedProject.title}
+                          className="w-full h-64 object-cover transition-transform duration-700 group-hover:scale-105"
+                        />
+                        <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                      </div>
+                      <h3 className="font-playfair text-lg font-light mb-2 group-hover:text-white/70 transition-colors">
+                        {relatedProject.title}
+                      </h3>
+                      <p className="text-white/50 text-sm font-light">
+                        {categoryMap[relatedProject.category]} • {relatedProject.year}
+                      </p>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </section>
+        )}
+      </main>
+    </div>
+  );
+}
+
 export default async function ProjectDetailPage({ params }: ProjectDetailPageProps) {
   const { id } = await params;
   const project = await getProjectById(id);
@@ -69,258 +231,5 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
 
   const relatedProjects = await getRelatedProjects(project.id, project.category);
 
-  return (
-    <div className="min-h-screen bg-gray-50">
-      {/* 导航面包屑 */}
-      <div className="bg-white border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <nav className="flex items-center space-x-2 text-sm text-gray-600">
-            <Link href="/" className="hover:text-gray-900">首页</Link>
-            <span>/</span>
-            <Link href="/projects" className="hover:text-gray-900">项目</Link>
-            <span>/</span>
-            <span className="text-gray-900">{project.title}</span>
-          </nav>
-        </div>
-      </div>
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* 主要内容区域 */}
-          <div className="lg:col-span-2">
-            {/* 项目标题和基本信息 */}
-            <div className="bg-white rounded-lg shadow-sm overflow-hidden mb-8">
-              <div className="aspect-w-16 aspect-h-9">
-                <img
-                  src={project.coverImage}
-                  alt={project.title}
-                  className="w-full h-64 sm:h-80 lg:h-96 object-cover"
-                />
-              </div>
-              
-              <div className="p-6 sm:p-8">
-                <div className="flex flex-wrap items-center gap-2 mb-4">
-                  <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
-                    {categoryMap[project.category]}
-                  </span>
-                  <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                    {statusMap[project.status]}
-                  </span>
-                  {project.isFeatured && (
-                    <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
-                      精选项目
-                    </span>
-                  )}
-                </div>
-
-                <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
-                  {project.title}
-                </h1>
-
-                <div className="flex flex-wrap items-center text-sm text-gray-600 mb-6 gap-4">
-                  <div className="flex items-center">
-                    <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                    </svg>
-                    {project.location}
-                  </div>
-                  
-                  {project.year && (
-                    <div className="flex items-center">
-                      <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                      </svg>
-                      {project.year}年
-                    </div>
-                  )}
-
-                  {project.area && (
-                    <div className="flex items-center">
-                      <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
-                      </svg>
-                      {project.area}
-                    </div>
-                  )}
-                </div>
-
-                {/* 项目描述 */}
-                {project.description && (
-                  <div className="prose prose-gray max-w-none mb-8">
-                    <ReactMarkdown
-                      remarkPlugins={[remarkGfm]}
-                      rehypePlugins={[rehypeSanitize]}
-                      // className="text-gray-700 leading-relaxed
-                    >
-                      {project.description}
-                    </ReactMarkdown>
-                  </div>
-                )}
-              </div>
-            </div>
-
-            {/* 项目详细信息 */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-              {/* 项目简介 */}
-              {project.brief && (
-                <div className="bg-white rounded-lg shadow-sm p-6">
-                  <h3 className="text-lg font-semibold text-gray-900 mb-4">项目简介</h3>
-                  <div className="prose prose-gray prose-sm max-w-none">
-                    <ReactMarkdown
-                      remarkPlugins={[remarkGfm]}
-                      rehypePlugins={[rehypeSanitize]}
-                    >
-                      {project.brief}
-                    </ReactMarkdown>
-                  </div>
-                </div>
-              )}
-
-              {/* 设计理念 */}
-              {project.concept && (
-                <div className="bg-white rounded-lg shadow-sm p-6">
-                  <h3 className="text-lg font-semibold text-gray-900 mb-4">设计理念</h3>
-                  <div className="prose prose-gray prose-sm max-w-none">
-                    <ReactMarkdown
-                      remarkPlugins={[remarkGfm]}
-                      rehypePlugins={[rehypeSanitize]}
-                    >
-                      {project.concept}
-                    </ReactMarkdown>
-                  </div>
-                </div>
-              )}
-            </div>
-
-            {/* 项目特色 */}
-            {project.features.length > 0 && (
-              <div className="bg-white rounded-lg shadow-sm p-6 sm:p-8 mb-8">
-                <h3 className="text-lg font-semibold text-gray-900 mb-4">项目特色</h3>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  {project.features.map((feature, index) => (
-                    <div key={index} className="flex items-start space-x-3">
-                      <div className="flex-shrink-0 w-2 h-2 bg-blue-500 rounded-full mt-2"></div>
-                      <span className="text-gray-700">{feature}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {/* 项目图片集 */}
-            {project.images.length > 1 && (
-              <div className="bg-white rounded-lg shadow-sm p-6 sm:p-8 mb-8">
-                <h3 className="text-lg font-semibold text-gray-900 mb-6">项目图片</h3>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                  {project.images.slice(1).map((image, index) => (
-                    <div key={index} className="aspect-w-4 aspect-h-3">
-                      <img
-                        src={image}
-                        alt={`${project.title} - 图片 ${index + 2}`}
-                        className="w-full h-48 object-cover rounded-lg hover:opacity-90 transition-opacity cursor-pointer"
-                      />
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-          </div>
-
-          {/* 侧边栏 */}
-          <div className="space-y-6">
-            {/* 项目信息 */}
-            <div className="bg-white rounded-lg shadow-sm p-6">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">项目信息</h3>
-              <dl className="space-y-3">
-                {project.client && (
-                  <div>
-                    <dt className="text-sm font-medium text-gray-500">委托方</dt>
-                    <dd className="text-sm text-gray-900">{project.client}</dd>
-                  </div>
-                )}
-                
-                {project.architect && (
-                  <div>
-                    <dt className="text-sm font-medium text-gray-500">建筑师</dt>
-                    <dd className="text-sm text-gray-900">{project.architect}</dd>
-                  </div>
-                )}
-
-                {project.city && (
-                  <div>
-                    <dt className="text-sm font-medium text-gray-500">城市</dt>
-                    <dd className="text-sm text-gray-900">{project.city}</dd>
-                  </div>
-                )}
-
-                <div>
-                  <dt className="text-sm font-medium text-gray-500">项目状态</dt>
-                  <dd className="text-sm text-gray-900">{statusMap[project.status]}</dd>
-                </div>
-
-                <div>
-                  <dt className="text-sm font-medium text-gray-500">最后更新</dt>
-                  <dd className="text-sm text-gray-900">
-                    {new Date(project.updatedAt).toLocaleDateString('zh-CN')}
-                  </dd>
-                </div>
-              </dl>
-            </div>
-
-            {/* 项目标签 */}
-            {project.tags.length > 0 && (
-              <div className="bg-white rounded-lg shadow-sm p-6">
-                <h3 className="text-lg font-semibold text-gray-900 mb-4">项目标签</h3>
-                <div className="flex flex-wrap gap-2">
-                  {project.tags.map((tag, index) => (
-                    <span
-                      key={index}
-                      className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-800"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {/* 相关项目 */}
-            {relatedProjects.length > 0 && (
-              <div className="bg-white rounded-lg shadow-sm p-6">
-                <h3 className="text-lg font-semibold text-gray-900 mb-4">相关项目</h3>
-                <div className="space-y-4">
-                  {relatedProjects.map((relatedProject) => (
-                    <Link
-                      key={relatedProject.id}
-                      href={`/projects/detail/${relatedProject.id}`}
-                      className="block group"
-                    >
-                      <div className="flex space-x-3">
-                        <div className="flex-shrink-0">
-                          <img
-                            src={relatedProject.coverImage}
-                            alt={relatedProject.title}
-                            className="w-16 h-16 object-cover rounded-lg group-hover:opacity-90 transition-opacity"
-                          />
-                        </div>
-                        <div className="flex-1 min-w-0">
-                          <p className="text-sm font-medium text-gray-900 group-hover:text-blue-600 transition-colors line-clamp-2">
-                            {relatedProject.title}
-                          </p>
-                          <p className="text-xs text-gray-500 mt-1">
-                            {categoryMap[relatedProject.category]}
-                          </p>
-                        </div>
-                      </div>
-                    </Link>
-                  ))}
-                </div>
-              </div>
-            )}
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+  return <ProjectDetailPageClient project={project} relatedProjects={relatedProjects} />;
 }

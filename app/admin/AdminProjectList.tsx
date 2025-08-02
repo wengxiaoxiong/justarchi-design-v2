@@ -3,17 +3,16 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { ProjectCategory, ProjectStatus } from '../../lib/types';
+import { ProjectCategory } from '../../lib/types';
 import { deleteProject } from '../../lib/actions';
 import { Project } from '@prisma/client';
 
 interface AdminProjectListProps {
   projects: Project[];
   categoryMap: Record<ProjectCategory, string>;
-  statusMap: Record<ProjectStatus, string>;
 }
 
-export default function AdminProjectList({ projects, categoryMap, statusMap }: AdminProjectListProps) {
+export default function AdminProjectList({ projects, categoryMap }: AdminProjectListProps) {
   const router = useRouter();
   const [deletingId, setDeletingId] = useState<string | null>(null);
 
@@ -88,12 +87,6 @@ export default function AdminProjectList({ projects, categoryMap, statusMap }: A
                       <p className="text-sm text-gray-600">
                         {categoryMap[project.category]} • {project.location}
                         {project.year && ` • ${project.year}年`}
-                      </p>
-                    </div>
-                    <div className="mt-1">
-                      <p className="text-xs text-gray-500">
-                        状态: {statusMap[project.status]} • 
-                        更新于: {new Date(project.updatedAt).toLocaleDateString('zh-CN')}
                       </p>
                     </div>
                   </div>

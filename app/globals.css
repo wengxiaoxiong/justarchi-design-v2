@@ -182,6 +182,31 @@ body {
   --sidebar-ring: oklch(0.556 0 0);
 }
 
+/* 滚动动画 */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in-up {
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.opacity-0 {
+  opacity: 0;
+}
+
+.opacity-100 {
+  opacity: 1;
+  transition: opacity 0.8s ease-in-out;
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
