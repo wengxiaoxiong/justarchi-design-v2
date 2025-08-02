@@ -9,13 +9,13 @@ export async function getArchitectureIndexProjects(): Promise<ArchitectureProjec
     where: {
       category: ProjectCategory.ARCHITECTURE,
       isPublished: true,
+      isFeatured: true, // 只获取精选项目
     },
     orderBy: [
-      { isFeatured: 'desc' },
       { sortOrder: 'asc' },
       { createdAt: 'desc' }
     ],
-    take: 6, // 首页只显示6个项目
+    take: 4, // 首页只显示4个精选项目
   })
 
   return projects.map(transformToArchitectureProject)

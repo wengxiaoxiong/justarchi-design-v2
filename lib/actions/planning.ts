@@ -3,19 +3,19 @@
 import { prisma } from '../db'
 import { ProjectCategory, type Project, type ArchitectureProject } from '../types'
 
-// 获取首页展示的城市规划项目
+// 获取首页展示的城市规划项目（精选项目）
 export async function getPlanningIndexProjects(): Promise<ArchitectureProject[]> {
   const projects = await prisma.project.findMany({
     where: {
       category: ProjectCategory.PLANNING,
       isPublished: true,
+      isFeatured: true, // 只获取精选项目
     },
     orderBy: [
-      { isFeatured: 'desc' },
       { sortOrder: 'asc' },
       { createdAt: 'desc' }
     ],
-    take: 6,
+    take: 4, // 首页只显示4个精选项目
   })
 
   return projects.map(transformToArchitectureProject)
