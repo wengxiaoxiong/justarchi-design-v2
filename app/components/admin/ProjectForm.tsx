@@ -379,29 +379,6 @@ export function ProjectForm({ mode, projectId, onSuccess }: ProjectFormProps) {
             </div>
           </div>
 
-          {/* 详细内容 */}
-          <div className="bg-white shadow rounded-lg p-6">
-            <h3 className="text-lg font-medium text-gray-900 mb-6">详细内容</h3>
-            
-            <div className="space-y-6">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  项目简介
-                </label>
-                <textarea
-                  value={formData.brief}
-                  onChange={(e) => handleInputChange('brief', e.target.value)}
-                  rows={4}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  placeholder="详细介绍项目背景和概况，支持Markdown格式"
-                />
-              </div>
-
-
-
-            </div>
-          </div>
-
           {/* 发布设置 */}
           <div className="bg-white shadow rounded-lg p-6">
             <h3 className="text-lg font-medium text-gray-900 mb-6">发布设置</h3>
