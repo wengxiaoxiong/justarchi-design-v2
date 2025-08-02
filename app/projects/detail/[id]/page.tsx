@@ -1,16 +1,13 @@
 'use client';
 
-import React, { useEffect } from 'react';
+import React from 'react';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import ReactMarkdown from 'react-markdown';
-import remarkGfm from 'remark-gfm';
-import rehypeSanitize from 'rehype-sanitize';
+import Image from 'next/image';
 import { prisma } from '../../../../lib/db';
-import { ProjectCategory } from '../../../../lib/types';
-import Navigation from '../../../components/landing-page/Navigation';
+import { ProjectCategory, Project } from '../../../../lib/types';
+import ProjectNavigation from '../../../components/landing-page/ProjectNavigation';
 import MarkdownRenderer from '../../../components/MarkdownRenderer';
-import useActiveSection from '../../../hooks/useActiveSection';
 import useScrollAnimation from '../../../hooks/useScrollAnimation';
 
 interface ProjectDetailPageProps {
@@ -58,24 +55,36 @@ const categoryMap: Record<ProjectCategory, string> = {
   [ProjectCategory.RESEARCH]: '研究项目',
 };
 
-function ProjectDetailPageClient({ project, relatedProjects }: { project: any; relatedProjects: any[] }) {
-  const activeSection = useActiveSection({
-    sections: ['home', 'about', 'core-values', 'architecture', 'interior', 'planning', 'contact-us']
-  });
-  
+function ProjectDetailPageClient({ 
+  project, 
+  relatedProjects 
+}: { 
+  project: Project; 
+  relatedProjects: Project[]; 
+}) {
   useScrollAnimation();
+
+  // 类型到URL映射
+  const categoryUrlMap: Record<ProjectCategory, string> = {
+    [ProjectCategory.ARCHITECTURE]: 'architecture',
+    [ProjectCategory.INTERIOR]: 'interior',
+    [ProjectCategory.PLANNING]: 'planning',
+    [ProjectCategory.LANDSCAPE]: 'landscape',
+    [ProjectCategory.URBAN_DESIGN]: 'urban-design',
+    [ProjectCategory.RESEARCH]: 'research',
+  };
 
   return (
     <div className="min-h-screen bg-black text-white">
       {/* 导航栏 */}
-      <Navigation activeSection={activeSection} />
+      <ProjectNavigation currentCategory={categoryUrlMap[project.category]} />
 
       {/* 主要内容 */}
       <main className="pt-20">
         {/* 返回按钮 */}
         <div className="fixed top-24 left-6 z-40">
           <Link 
-            href="/" 
+            href="/projects" 
             className="group flex items-center text-white/60 hover:text-white transition-all duration-300 bg-black/50 backdrop-blur-sm px-4 py-2 rounded-full border border-white/10"
           >
             <svg 
@@ -93,10 +102,11 @@ function ProjectDetailPageClient({ project, relatedProjects }: { project: any; r
         {/* 项目标题区域 */}
         <section className="relative h-screen flex items-center justify-center overflow-hidden">
           <div className="absolute inset-0 z-0">
-            <img
+            <Image
               src={project.coverImage}
               alt={project.title}
-              className="w-full h-full object-cover opacity-40"
+              fill
+              className="object-cover opacity-40"
             />
             <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/80"></div>
           </div>
@@ -161,20 +171,81 @@ function ProjectDetailPageClient({ project, relatedProjects }: { project: any; r
         {/* 项目图片集 */}
         {project.images.length > 1 && (
           <section className="py-20">
-            <div className="max-w-6xl mx-auto px-6 lg:px-8">
-              <div className="space-y-20">
-                {project.images.slice(1).map((image, index) => (
+            <div className="max-w-7xl mx-auto px-6 lg:px-8">
+              {/* 移动端：垂直堆叠 */}
+              <div className="block md:hidden space-y-12">
+                {project.images.slice(1).map((image: string, index: number) => (
                   <div key={index} className="opacity-0 fade-in-up group" style={{ animationDelay: `${index * 0.2}s` }}>
                     <div className="relative overflow-hidden">
-                      <img
+                      <Image
                         src={image}
                         alt={`${project.title} - Image ${index + 2}`}
+                        width={800}
+                        height={600}
                         className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105"
                       />
                       <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                     </div>
                   </div>
                 ))}
+              </div>
+
+              {/* 桌面端：网格/拼图布局 */}
+              <div className="hidden md:block">
+                <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 lg:gap-6">
+                  {project.images.slice(1).map((image: string, index: number) => {
+                    // 创建动态网格布局 - 某些图片占更大空间
+                    const isLarge = index % 5 === 0; // 每5个图片中有一个大图
+                    const isMedium = index % 3 === 0 && !isLarge; // 每3个图片中有一个中图
+                    
+                    let colSpan = 'col-span-1';
+                    let rowSpan = 'row-span-1';
+                    let heightClass = 'h-64 lg:h-72';
+                    
+                    if (isLarge) {
+                      colSpan = 'col-span-2';
+                      rowSpan = 'row-span-2';
+                      heightClass = 'h-80 lg:h-96';
+                    } else if (isMedium) {
+                      colSpan = 'lg:col-span-2 xl:col-span-2';
+                      heightClass = 'h-48 lg:h-56';
+                    }
+
+                    return (
+                      <div 
+                        key={index} 
+                        className={`opacity-0 fade-in-up group ${colSpan} ${rowSpan}`}
+                        style={{ animationDelay: `${index * 0.1}s` }}
+                      >
+                        <div className={`relative overflow-hidden ${heightClass} w-full`}>
+                          <Image
+                            src={image}
+                            alt={`${project.title} - Image ${index + 2}`}
+                            fill
+                            className="object-cover transition-transform duration-700 group-hover:scale-105"
+                          />
+                          <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                          
+                          {/* 图片序号指示器 */}
+                          <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <div className="bg-black/60 backdrop-blur-sm text-white text-xs px-2 py-1 rounded">
+                              {index + 2}/{project.images.length}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+                
+                {/* 查看全部图片提示 */}
+                {project.images.length > 7 && (
+                  <div className="text-center mt-12 opacity-0 fade-in-up" style={{ animationDelay: '0.8s' }}>
+                    <p className="text-white/60 text-sm font-light">
+                      显示 {Math.min(project.images.length - 1, 12)} / {project.images.length - 1} 张图片
+                    </p>
+                  </div>
+                )}
               </div>
             </div>
           </section>
@@ -196,9 +267,11 @@ function ProjectDetailPageClient({ project, relatedProjects }: { project: any; r
                       className="group block"
                     >
                       <div className="relative overflow-hidden mb-4">
-                        <img
+                        <Image
                           src={relatedProject.coverImage}
                           alt={relatedProject.title}
+                          width={400}
+                          height={300}
                           className="w-full h-64 object-cover transition-transform duration-700 group-hover:scale-105"
                         />
                         <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -221,7 +294,7 @@ function ProjectDetailPageClient({ project, relatedProjects }: { project: any; r
   );
 }
 
-export default async function ProjectDetailPage({ params }: ProjectDetailPageProps) {
+async function ProjectDetailPageServer({ params }: ProjectDetailPageProps) {
   const { id } = await params;
   const project = await getProjectById(id);
 
@@ -232,4 +305,8 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
   const relatedProjects = await getRelatedProjects(project.id, project.category);
 
   return <ProjectDetailPageClient project={project} relatedProjects={relatedProjects} />;
+}
+
+export default function ProjectDetailPage({ params }: ProjectDetailPageProps) {
+  return <ProjectDetailPageServer params={params} />;
 }

@@ -1,12 +1,12 @@
 'use client';
 
-import React, { useEffect } from 'react';
+import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { prisma } from '../../../lib/db';
-import { ProjectCategory } from '../../../lib/types';
-import Navigation from '../../components/landing-page/Navigation';
-import useActiveSection from '../../hooks/useActiveSection';
+import { ProjectCategory, Project } from '../../../lib/types';
+import ProjectNavigation from '../../components/landing-page/ProjectNavigation';
 import useScrollAnimation from '../../hooks/useScrollAnimation';
 
 interface ProjectCategoryPageProps {
@@ -49,19 +49,15 @@ function ProjectCategoryPageClient({
 }: { 
   category: string; 
   categoryInfo: { name: string; enum: ProjectCategory }; 
-  projects: any[]; 
+  projects: Project[]; 
   categoryMap: Record<string, { name: string; enum: ProjectCategory }>;
 }) {
-  const activeSection = useActiveSection({
-    sections: ['home', 'about', 'core-values', 'architecture', 'interior', 'planning', 'contact-us']
-  });
-  
   useScrollAnimation();
 
   return (
     <div className="min-h-screen bg-black text-white">
       {/* 导航栏 */}
-      <Navigation activeSection={activeSection} />
+      <ProjectNavigation currentCategory={category} />
 
       {/* 页面标题区域 */}
       <section className="relative pt-20 pb-32 overflow-hidden">
@@ -116,7 +112,7 @@ function ProjectCategoryPageClient({
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {projects.map((project, index) => (
+              {projects.map((project: Project, index: number) => (
                 <Link 
                   key={project.id} 
                   href={`/projects/detail/${project.id}`} 
@@ -124,9 +120,11 @@ function ProjectCategoryPageClient({
                   style={{ animationDelay: `${index * 0.1}s` }}
                 >
                   <div className="relative overflow-hidden mb-6">
-                    <img
+                    <Image
                       src={project.coverImage}
                       alt={project.title}
+                      width={400}
+                      height={300}
                       className="w-full h-64 md:h-72 object-cover transition-transform duration-700 group-hover:scale-105"
                     />
                     <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -207,7 +205,7 @@ function ProjectCategoryPageClient({
   );
 }
 
-export default async function ProjectCategoryPage({ params }: ProjectCategoryPageProps) {
+async function ProjectCategoryPageServer({ params }: ProjectCategoryPageProps) {
   const { category } = await params;
   
   // 验证分类是否存在
@@ -226,4 +224,8 @@ export default async function ProjectCategoryPage({ params }: ProjectCategoryPag
       categoryMap={categoryMap}
     />
   );
+}
+
+export default function ProjectCategoryPage({ params }: ProjectCategoryPageProps) {
+  return <ProjectCategoryPageServer params={params} />;
 }
