@@ -39,6 +39,7 @@ export default function ProjectDetailClient({
       {/* 主要内容 */}
       <main className="pt-20">
         {/* 返回按钮 */}
+        
         <div className="fixed top-24 left-6 z-40">
           <Link 
             href={`/projects/${categoryUrlMap[project.category]}`}
