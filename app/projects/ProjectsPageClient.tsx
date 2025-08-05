@@ -138,13 +138,13 @@ export default function ProjectsPageClient({
                 <Link key={project.id} href={`/projects/detail/${project.id}`} className="group">
                   <div className="bg-gray-800 rounded-lg shadow-sm overflow-hidden hover:shadow-xl hover:shadow-gray-900/50 transition-shadow duration-300">
                     {/* 项目图片 */}
-                    <div className="aspect-w-16 aspect-h-10 relative">
+                    <div className="relative aspect-[4/3]">
                       <Image
                         src={project.coverImage}
                         alt={project.title}
-                        width={400}
-                        height={300}
-                        className="w-full h-48 sm:h-56 object-cover group-hover:scale-105 transition-transform duration-300"
+                        fill
+                        className="object-cover group-hover:scale-105 transition-transform duration-300"
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                       />
                       {project.isFeatured && (
                         <div className="absolute top-3 left-3">

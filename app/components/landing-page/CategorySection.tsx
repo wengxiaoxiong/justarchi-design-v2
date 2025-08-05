@@ -33,7 +33,7 @@ const CategorySection: React.FC<CategorySectionProps> = ({
             <div className="absolute -left-20 -top-20 w-40 h-40 bg-blue-500/10 rounded-full blur-3xl"></div>
             <div className="absolute -right-20 -bottom-20 w-40 h-40 bg-purple-500/10 rounded-full blur-3xl"></div>
             
-            <div className="relative w-full h-full min-h-[240px] sm:min-h-[280px] md:min-h-[320px]">
+            <div className="relative w-full aspect-[4/3]">
               <img 
                 src={project.image} 
                 alt={project.title} 

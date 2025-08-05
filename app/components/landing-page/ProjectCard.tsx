@@ -25,7 +25,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
     <div className={`group relative overflow-hidden rounded-lg ${className}`}>
       <div className={`absolute -left-20 -top-20 w-40 h-40 ${gradientColors.top} rounded-full blur-3xl`}></div>
       <div className={`absolute -right-20 -bottom-20 w-40 h-40 ${gradientColors.bottom} rounded-full blur-3xl`}></div>
-      <div className="relative w-full h-full min-h-[240px] sm:min-h-[280px] md:min-h-[320px]">
+      <div className="relative w-full aspect-[4/3]">
         <img
           src={image}
           alt={title}

@@ -7,6 +7,7 @@ import { ProjectCategory, Project } from '../../../../lib/types';
 import ProjectNavigation from '../../../components/landing-page/ProjectNavigation';
 import MarkdownRenderer from '../../../components/MarkdownRenderer';
 import useScrollAnimation from '../../../hooks/useScrollAnimation';
+import ImageGallery from '../../../components/ImageGallery';
 
 interface ProjectDetailClientProps {
   project: Project;
@@ -132,79 +133,15 @@ export default function ProjectDetailClient({
           {project.images.length > 1 && (
             <section className="py-20">
               <div className="max-w-7xl mx-auto px-6 lg:px-8">
-                {/* 移动端：垂直堆叠 */}
-                <div className="block md:hidden space-y-12">
-                  {project.images.slice(1).map((image: string, index: number) => (
-                    <div key={index} className="opacity-0 fade-in-up group" style={{ animationDelay: `${index * 0.2}s` }}>
-                      <div className="relative overflow-hidden">
-                        <Image
-                          src={image}
-                          alt={`${project.title} - Image ${index + 2}`}
-                          width={800}
-                          height={600}
-                          className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105"
-                        />
-                        <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-
-                {/* 桌面端：保持原比例布局 */}
-                <div className="hidden md:block">
-                  <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 lg:gap-6">
-                    <div className="relative w-full overflow-hidden opacity-0 fade-in-up group">
-                      {/* 封面图 */}
-                      <Image
-                        src={project.coverImage}
-                        alt={`${project.title} - Cover Image`}
-                        width={800}
-                        height={600}
-                        className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105"
-                      />
-                      <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                      {/* 封面图序号指示器 */}
-                      <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        <div className="bg-black/60 backdrop-blur-sm text-white text-xs px-2 py-1 rounded">
-                          1/{project.images.length}
-                        </div>
-                      </div>
-                    </div>
-                    {project.images.slice(1).map((image: string, index: number) => (
-                      <div
-                        key={index}
-                        className="opacity-0 fade-in-up group"
-                        style={{ animationDelay: `${index * 0.1}s` }}
-                      >
-                        <div className="relative w-full overflow-hidden">
-                          <Image
-                            src={image}
-                            alt={`${project.title} - Image ${index + 2}`}
-                            width={800}
-                            height={600}
-                            className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105"
-                          />
-                          <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-
-                          {/* 图片序号指示器 */}
-                          <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <div className="bg-black/60 backdrop-blur-sm text-white text-xs px-2 py-1 rounded">
-                              {index + 2}/{project.images.length}
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-
-                  {/* 查看全部图片提示 */}
-                  {project.images.length > 7 && (
-                    <div className="text-center mt-12 opacity-0 fade-in-up" style={{ animationDelay: '0.8s' }}>
-                      <p className="text-white/60 text-sm font-light">
-                        显示 {Math.min(project.images.length - 1, 12)} / {project.images.length - 1} 张图片
-                      </p>
-                    </div>
-                  )}
+                <div className="fade-in-up">
+                  <h2 className="text-2xl md:text-3xl font-playfair font-light mb-12 text-center tracking-wide text-gray-800">
+                    项目图片
+                  </h2>
+                  <ImageGallery 
+                    images={project.images}
+                    title={project.title}
+                    aspectRatio="4:3"
+                  />
                 </div>
               </div>
             </section>
