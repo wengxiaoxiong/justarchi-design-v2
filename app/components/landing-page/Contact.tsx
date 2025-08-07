@@ -4,7 +4,12 @@ const Contact: React.FC = () => {
   return (
     <section id="contact-us" className="min-h-screen bg-black text-white flex items-center">
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 py-16 sm:py-20 md:py-24 lg:py-32">
-        <h2 className="font-playfair text-3xl sm:text-4xl md:text-5xl font-bold mb-10 sm:mb-16 md:mb-24 text-center">聯繫我們</h2>
+        <h2 className="font-playfair text-3xl sm:text-4xl md:text-5xl font-bold mb-10 sm:mb-16 md:mb-24 text-center">
+          聯繫我們
+          <div className="text-lg sm:text-xl md:text-2xl font-light text-gray-300 mt-2">
+            Contact Us
+          </div>
+        </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16">
           <div className="space-y-10 md:space-y-16">
             <div>
@@ -14,6 +19,12 @@ const Contact: React.FC = () => {
                 得體設計建築師事務所 創辦人<br />
                 美國紐約州註冊建築師<br />
                 台灣註冊建築師
+                <div className="text-sm text-gray-400 mt-2 leading-relaxed">
+                  Leo Weng<br />
+                  Founder of Justarchi<br />
+                  Registered Architect in New York State<br />
+                  Taiwan Registered Architect
+                </div>
               </p>
             </div>
             <div>
@@ -22,6 +33,11 @@ const Contact: React.FC = () => {
                 2000 英國倫敦大學巴特雷學院建築碩士<br />
                 1996 淡江大學建築學士<br />
                 1991 臺北市建國中學
+                <div className="text-sm text-gray-400 mt-2 leading-relaxed">
+                  2000 Master of Architecture, Bartlett School of Architecture, University College London<br />
+                  1996 Bachelor of Architecture, Tamkang University<br />
+                  1991 Taipei Municipal Jianguo High School
+                </div>
               </p>
             </div>
             <div>
@@ -32,6 +48,13 @@ const Contact: React.FC = () => {
                 湖南株洲天元區政中心招標首獎<br />
                 揚州京華城招標第一名<br />
                 2019 淡江大學建築系傑出系友
+                <div className="text-sm text-gray-400 mt-2 leading-relaxed">
+                  2010 Second Place in International Tender for Shanghai Expo Oman Pavilion<br />
+                  Japan JCD Design Award<br />
+                  First Prize in Tender for Hunan Zhuzhou Tianyuan District Government Center<br />
+                  First Place in Tender for Yangzhou Jinghua City<br />
+                  2019 Outstanding Alumni of Department of Architecture, Tamkang University
+                </div>
               </p>
             </div>
             <div>
@@ -70,6 +93,10 @@ const Contact: React.FC = () => {
               <p className="text-gray-300 text-sm leading-relaxed">
                 &ldquo;作品遍及海峽兩岸、香港、柬埔寨、泰國等地<br />
                 致力於創造融合傳統與現代的建築作品&rdquo;
+                <div className="text-xs text-gray-400 mt-2 leading-relaxed">
+                  &ldquo;Works span across the Taiwan Strait, Hong Kong, Cambodia, Thailand and other regions<br />
+                  Dedicated to creating architectural works that blend tradition with modernity&rdquo;
+                </div>
               </p>
               <button className="!rounded-button w-full bg-white text-black py-3 md:py-4 text-base md:text-lg font-medium hover:bg-gray-100 transition-colors duration-300">
                 了解更多作品 <i className="fas fa-arrow-right ml-2" />

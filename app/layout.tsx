@@ -35,7 +35,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="zh-Hant" className={`${inter.variable} ${notoSansTC.variable} ${playfairDisplay.variable}`}>
+    <html lang="zh-TW" className={`${inter.variable} ${notoSansTC.variable} ${playfairDisplay.variable}`}>
       <body className="font-sans antialiased">
         {children}
       </body>

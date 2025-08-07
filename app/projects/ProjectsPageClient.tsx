@@ -34,9 +34,9 @@ export default function ProjectsPageClient({
         <div className="bg-gray-900 border-b border-gray-800">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
             <nav className="flex items-center space-x-2 text-sm text-gray-400">
-              <Link href="/" className="hover:text-white">首页</Link>
+              <Link href="/" className="hover:text-white">首頁</Link>
               <span>/</span>
-              <span className="text-white">项目</span>
+              <span className="text-white">項目</span>
             </nav>
           </div>
         </div>
@@ -46,34 +46,34 @@ export default function ProjectsPageClient({
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="text-center">
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">
-              我们的项目
+              我們的項目
             </h1>
             <p className="text-lg text-gray-300 max-w-3xl mx-auto mb-8">
-              探索JustArchi Design在建筑设计、室内设计、城市规划等领域的精彩作品，
-              每个项目都体现了我们对设计的专业态度和创新追求。
+              探索JustArchi Design在建築設計、室內設計、城市規劃等領域的精彩作品，
+              每個項目都體現了我們對設計的專業態度和創新追求。
             </p>
             
             {/* 统计信息 */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 max-w-2xl mx-auto">
               <div className="text-center">
                 <div className="text-2xl sm:text-3xl font-bold text-blue-400">{stats.total}</div>
-                <div className="text-sm text-gray-400 mt-1">总项目数</div>
+                <div className="text-sm text-gray-400 mt-1">總項目數</div>
               </div>
               <div className="text-center">
                 <div className="text-2xl sm:text-3xl font-bold text-green-400">{stats.featured}</div>
-                <div className="text-sm text-gray-400 mt-1">精选项目</div>
+                <div className="text-sm text-gray-400 mt-1">精選項目</div>
               </div>
               <div className="text-center">
                 <div className="text-2xl sm:text-3xl font-bold text-purple-400">
                   {Object.keys(projectsGrouped).length}
                 </div>
-                <div className="text-sm text-gray-400 mt-1">设计领域</div>
+                <div className="text-sm text-gray-400 mt-1">設計領域</div>
               </div>
               <div className="text-center">
                 <div className="text-2xl sm:text-3xl font-bold text-orange-400">
                   {new Date().getFullYear() - 2015}+
                 </div>
-                <div className="text-sm text-gray-400 mt-1">年经验</div>
+                <div className="text-sm text-gray-400 mt-1">年經驗</div>
               </div>
             </div>
           </div>
@@ -118,7 +118,7 @@ export default function ProjectsPageClient({
                   {categoryMap[category as ProjectCategory]}
                 </h2>
                 <p className="text-gray-400">
-                  {projects.length} 个项目
+                  {projects.length} 個項目
                 </p>
               </div>
               <Link
@@ -149,7 +149,7 @@ export default function ProjectsPageClient({
                       {project.isFeatured && (
                         <div className="absolute top-3 left-3">
                           <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
-                            精选
+                            精選
                           </span>
                         </div>
                       )}
@@ -184,7 +184,7 @@ export default function ProjectsPageClient({
                       {/* 查看详情按钮 */}
                       <div className="flex items-center justify-between">
                         <span className="text-sm font-medium text-blue-400 group-hover:text-blue-300">
-                          查看详情
+                          查看詳情
                         </span>
                         <svg className="w-4 h-4 text-blue-400 group-hover:text-blue-300 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -203,7 +203,7 @@ export default function ProjectsPageClient({
                   href={`/projects/${categoryUrlMap[category as ProjectCategory]}`}
                   className="inline-flex items-center px-6 py-3 border border-gray-600 rounded-md text-base font-medium text-gray-300 bg-gray-800 hover:bg-gray-700 hover:border-gray-500 transition-colors"
                 >
-                  查看{categoryMap[category as ProjectCategory]}全部项目
+                  查看{categoryMap[category as ProjectCategory]}全部項目
                   <span className="ml-2 inline-flex items-center justify-center px-2 py-1 text-sm font-medium rounded-full bg-blue-600 text-blue-100">
                     {projects.length}
                   </span>
@@ -219,17 +219,17 @@ export default function ProjectsPageClient({
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="text-center">
             <h3 className="text-2xl font-bold text-white mb-4">
-              有设计需求？
+              有設計需求？
             </h3>
             <p className="text-lg text-gray-300 mb-8 max-w-2xl mx-auto">
-              我们专注于建筑设计、室内设计、城市规划等领域，
-              为您提供专业的设计服务和创新的解决方案。
+              我們專注於建築設計、室內設計、城市規劃等領域，
+              為您提供專業的設計服務和創新的解決方案。
             </p>
             <Link
               href="/#contact-us"
               className="inline-flex items-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 transition-colors"
             >
-              联系我们
+              聯繫我們
               <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
               </svg>

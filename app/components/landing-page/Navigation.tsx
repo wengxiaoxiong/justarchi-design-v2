@@ -132,7 +132,7 @@ const Navigation: React.FC<NavigationProps> = ({ activeSection }) => {
               }`}
             onClick={() => scrollToSection('home')}
           >
-            得體設計
+            Justarchi
           </div>
           {/* 桌面导航 - 在中等屏幕以上显示 */}
           <nav className="ml-8 md:ml-12 hidden md:flex gap-3 lg:gap-6">
@@ -147,7 +147,7 @@ const Navigation: React.FC<NavigationProps> = ({ activeSection }) => {
                 className={`text-white hover:text-gray-300 transition-all duration-300 text-xs lg:text-sm relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[2px] after:bg-white hover:after:w-full after:transition-all after:duration-300 ${activeSection === item.id ? 'after:w-full' : ''
                   }`}
               >
-                {item.name}
+                <div>{item.nameEn}</div>
               </a>
             ))}
           </nav>
@@ -158,7 +158,7 @@ const Navigation: React.FC<NavigationProps> = ({ activeSection }) => {
           className="hidden md:block !rounded-button bg-white/10 border border-white/20 text-white px-4 py-2 text-sm font-medium hover:bg-white/20 transition-colors duration-300 whitespace-nowrap backdrop-blur-sm"
           onClick={() => scrollToSection('contact-us')}
         >
-          聯繫我們 <i className="fas fa-arrow-right ml-2" />
+          Contact <i className="fas fa-arrow-right ml-2" />
         </button>
 
         {/* 移动端菜单按钮 */}
@@ -201,7 +201,7 @@ const Navigation: React.FC<NavigationProps> = ({ activeSection }) => {
             }}
             className={`text-white text-xl font-bold transition-colors duration-200 ${activeSection === 'home' ? 'text-blue-400' : 'hover:text-gray-300'}`}
           >
-            首頁
+            Home
           </a>
           {navItems.map((item) => (
             <a
@@ -213,14 +213,14 @@ const Navigation: React.FC<NavigationProps> = ({ activeSection }) => {
               }}
               className={`text-white text-xl font-bold transition-colors duration-200 ${activeSection === item.id ? 'text-blue-400' : 'hover:text-gray-300'}`}
             >
-              {item.name}
+              <div>{item.nameEn}</div>
             </a>
           ))}
           <button
             className="mt-8 !rounded-button bg-white/10 border border-white/20 text-white px-8 py-3 text-lg font-medium hover:bg-white/20 transition-colors duration-300 whitespace-nowrap backdrop-blur-sm"
             onClick={() => scrollToSection('contact-us')}
           >
-            聯繫我們 <i className="fas fa-arrow-right ml-2" />
+            Contact <i className="fas fa-arrow-right ml-2" />
           </button>
         </nav>
       </div>

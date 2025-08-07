@@ -7,7 +7,7 @@ import { ProjectCategory, Project } from '../../../../lib/types';
 import ProjectNavigation from '../../../components/landing-page/ProjectNavigation';
 import MarkdownRenderer from '../../../components/MarkdownRenderer';
 import useScrollAnimation from '../../../hooks/useScrollAnimation';
-import ImageGallery from '../../../components/ImageGallery';
+import SimpleImageViewer from '../../../components/SimpleImageViewer';
 
 interface ProjectDetailClientProps {
   project: Project;
@@ -137,10 +137,10 @@ export default function ProjectDetailClient({
                   <h2 className="text-2xl md:text-3xl font-playfair font-light mb-12 text-center tracking-wide text-gray-800">
                     项目图片
                   </h2>
-                  <ImageGallery 
+                  <SimpleImageViewer 
                     images={project.images}
                     title={project.title}
-                    aspectRatio="4:3"
+                    projectId={project.id}
                   />
                 </div>
               </div>

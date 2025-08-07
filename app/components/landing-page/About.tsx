@@ -21,15 +21,14 @@ const staggerContainer = {
   }
 };
 
-const 
-About: React.FC = () => {
+const About: React.FC = () => {
   const honors = [
-    { title: "上海世博會阿曼館", desc: "國際招標第二名" },
-    { title: "日本JCD設計大賞", desc: "與臺灣龍采合作" },
-    { title: "湖南株洲天元區政中心", desc: "與上海合院合作 招標首獎" },
-    { title: "揚州京華城", desc: "與上海合院合作 招標第一名" },
-    { title: "228公園與萬華406", desc: "國際競圖佳作" },
-    { title: "中國民族建築協會", desc: "設計影響力人物" }
+    { title: "上海世博會阿曼館", desc: "國際招標第二名", titleEn: "Shanghai Expo Oman Pavilion", descEn: "Second Place in International Tender" },
+    { title: "日本JCD設計大賞", desc: "與臺灣龍采合作", titleEn: "Japan JCD Design Award", descEn: "Collaboration with Taiwan Longcai" },
+    { title: "湖南株洲天元區政中心", desc: "與上海合院合作 招標首獎", titleEn: "Hunan Zhuzhou Tianyuan District Government Center", descEn: "First Prize in Tender with Shanghai Heyuan" },
+    { title: "揚州京華城", desc: "與上海合院合作 招標第一名", titleEn: "Yangzhou Jinghua City", descEn: "First Place in Tender with Shanghai Heyuan" },
+    { title: "228公園與萬華406", desc: "國際競圖佳作", titleEn: "228 Park and Wanhua 406", descEn: "International Competition Honorable Mention" },
+    { title: "中國民族建築協會", desc: "設計影響力人物", titleEn: "China National Architecture Association", descEn: "Design Influential Figure" }
   ];
 
   return (
@@ -48,6 +47,9 @@ About: React.FC = () => {
           </h2>
           <h3 className="font-playfair text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900">
             關於團隊
+            <div className="text-lg md:text-xl lg:text-2xl font-light text-gray-600 mt-2">
+              About Our Team
+            </div>
           </h3>
         </motion.div>
 
@@ -90,6 +92,9 @@ About: React.FC = () => {
         >
           <h4 className="text-xl md:text-2xl font-semibold text-gray-900 mb-8 text-center">
             國際設計榮譽
+            <div className="text-base md:text-lg font-light text-gray-600 mt-1">
+              International Design Honors
+            </div>
           </h4>
           <motion.div
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
@@ -111,7 +116,9 @@ About: React.FC = () => {
                 }}
               >
                 <h5 className="font-medium text-gray-900 mb-2">{item.title}</h5>
-                <p className="text-gray-600 text-sm">{item.desc}</p>
+                <p className="text-gray-600 text-sm mb-2">{item.desc}</p>
+                <h6 className="font-medium text-gray-700 text-sm">{item.titleEn}</h6>
+                <p className="text-gray-500 text-xs">{item.descEn}</p>
               </motion.div>
             ))}
           </motion.div>

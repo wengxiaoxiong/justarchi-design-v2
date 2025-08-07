@@ -26,12 +26,18 @@ const Hero: React.FC = () => {
         <div className="absolute bottom-12 sm:bottom-12 md:bottom-16 lg:bottom-20 xl:bottom-24 2xl:bottom-32 left-4 sm:left-4 md:left-6 lg:left-8 xl:left-12 2xl:left-16 max-w-[360px] sm:max-w-[380px] md:max-w-[450px] lg:max-w-[520px] xl:max-w-[600px] 2xl:max-w-[680px] text-white text-left px-4 sm:px-0">
           <h1 className="font-playfair text-3xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-bold mb-3 sm:mb-3 md:mb-4 lg:mb-5 xl:mb-6 leading-normal tracking-wider">
             得體設計建築師事務所
+            <div className="text-lg sm:text-base md:text-lg lg:text-xl xl:text-2xl 2xl:text-3xl font-light text-gray-300 mt-2">
+              Justarchi
+            </div>
           </h1>
           <h2 className="text-lg sm:text-base md:text-lg lg:text-xl xl:text-2xl 2xl:text-3xl font-light mb-3 sm:mb-3 md:mb-4 lg:mb-5 text-gray-200 tracking-wider">
             JUSTARCHI / WENG SHI ARCHITECTS
           </h2>
           <p className="text-base sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-2xl mb-4 sm:mb-4 md:mb-5 lg:mb-6 xl:mb-8 leading-relaxed tracking-wide font-light">
             創辦人翁獅，致力於創造融合傳統與現代的建築作品。JUST蘊含公平、正義、恰當、剛剛好的多重意涵，體現中庸之道與至善狀態的價值取向。
+            <div className="text-sm sm:text-xs md:text-sm lg:text-base xl:text-lg 2xl:text-xl text-gray-300 mt-2 leading-relaxed">
+              Founded by Leo Weng, we are dedicated to creating architectural works that blend tradition with modernity. JUST embodies multiple meanings of fairness, justice, appropriateness, and just-rightness, reflecting the value orientation of the golden mean and the state of perfection.
+            </div>
           </p>
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-3 md:gap-4 lg:gap-5">
             <button onClick={() => {
