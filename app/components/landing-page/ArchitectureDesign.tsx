@@ -21,7 +21,7 @@ const ArchitectureDesign: React.FC<ArchitectureDesignProps> = ({
           description="Architecture Design"
           projects={architectureProjects}
           categoryHref="/projects/architecture"
-          buttonText="查看更多建筑设计项目"
+          buttonText="查看更多建築設計項目"
         />
 
         <div id="interior">
@@ -30,7 +30,7 @@ const ArchitectureDesign: React.FC<ArchitectureDesignProps> = ({
             description="Interior Design"
             projects={interiorProjects}
             categoryHref="/projects/interior"
-            buttonText="查看更多室内设计项目"
+            buttonText="查看更多室內設計項目"
           />
         </div>
 
@@ -40,7 +40,7 @@ const ArchitectureDesign: React.FC<ArchitectureDesignProps> = ({
             description="Urban Planning"
             projects={planningProjects}
             categoryHref="/projects/planning"
-            buttonText="查看更多城市规划项目"
+            buttonText="查看更多城市規劃項目"
           />
         </div>
 

@@ -80,7 +80,7 @@ const ProjectDistribution: React.FC = () => {
         {/* 统计概览 */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16">
           <div className="text-center">
-            <div className="text-3xl md:text-4xl font-bold text-white mb-2">{totalProjects}+</div>
+            <div className="text-3xl md:text-4xl font-bold text-white mb-2">100+</div>
             <div className="text-gray-400">完成項目</div>
           </div>
           <div className="text-center">
