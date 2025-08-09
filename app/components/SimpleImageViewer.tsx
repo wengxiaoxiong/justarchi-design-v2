@@ -4,6 +4,8 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import { createPortal } from 'react-dom';
 
+const OPEN_FULL_IMAGE_LABEL = '點擊查看大圖';
+
 interface SimpleImageViewerProps {
   images: string[];
   title: string;
@@ -97,7 +99,7 @@ export default function SimpleImageViewer({ images, title, projectId }: SimpleIm
           {/* 点击提示 */}
           <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
             <div className="bg-white/90 backdrop-blur-sm text-gray-800 px-6 py-3 rounded-full font-medium shadow-lg">
-              点击查看大图
+              {OPEN_FULL_IMAGE_LABEL}
             </div>
           </div>
 

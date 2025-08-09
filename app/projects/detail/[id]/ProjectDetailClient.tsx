@@ -12,7 +12,7 @@ import SimpleImageViewer from '../../../components/SimpleImageViewer';
 interface ProjectDetailClientProps {
   project: Project;
   relatedProjects: Project[];
-  categoryMap: Record<ProjectCategory, string>;
+  categoryMap: Partial<Record<ProjectCategory, string>>;
 }
 
 export default function ProjectDetailClient({ 
@@ -23,19 +23,28 @@ export default function ProjectDetailClient({
   useScrollAnimation();
 
   // 类型到URL映射
-  const categoryUrlMap: Record<ProjectCategory, string> = {
+  const categoryUrlMap: Partial<Record<ProjectCategory, string>> = {
     [ProjectCategory.ARCHITECTURE]: 'architecture',
     [ProjectCategory.INTERIOR]: 'interior',
     [ProjectCategory.PLANNING]: 'planning',
     [ProjectCategory.LANDSCAPE]: 'landscape',
-    [ProjectCategory.URBAN_DESIGN]: 'urban-design',
-    [ProjectCategory.RESEARCH]: 'research',
+    // 已移除：URBAN_DESIGN（urban-design）
+    // 已移除：RESEARCH（research）
   };
+
+  const currentCategorySlug = categoryUrlMap[project.category];
+
+  // 画廊图片：将封面图合并进图片数组并去重
+  const galleryImages = React.useMemo(() => {
+    const list = [project.coverImage, ...(project.images || [])].filter(Boolean);
+    // 去重
+    return Array.from(new Set(list));
+  }, [project.coverImage, project.images]);
 
   return (
     <div className="min-h-screen bg-black text-white">
       {/* 导航栏 */}
-      <ProjectNavigation currentCategory={categoryUrlMap[project.category]} />
+      <ProjectNavigation currentCategory={currentCategorySlug} />
 
       {/* 主要内容 */}
       <main className="pt-20">
@@ -43,7 +52,7 @@ export default function ProjectDetailClient({
         
         <div className="fixed top-24 left-6 z-40">
           <Link 
-            href={`/projects/${categoryUrlMap[project.category]}`}
+            href={`/projects/${currentCategorySlug || ''}`}
             className="group flex items-center text-white/60 hover:text-white transition-all duration-300 bg-black/50 backdrop-blur-sm px-4 py-2 rounded-full border border-white/10"
           >
             <svg 
@@ -75,13 +84,7 @@ export default function ProjectDetailClient({
               <span className="inline-block text-sm tracking-[0.3em] text-white/60 font-light uppercase mb-4">
                 {categoryMap[project.category]}
               </span>
-              {project.isFeatured && (
-                <div className="inline-block ml-4">
-                  <span className="text-xs tracking-wider text-white/40 border border-white/20 px-3 py-1 rounded-full">
-                    FEATURED
-                  </span>
-                </div>
-              )}
+              {/* 精选标签已移除 */}
             </div>
             
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-playfair font-light leading-none mb-8 tracking-tight">
@@ -129,16 +132,16 @@ export default function ProjectDetailClient({
 
         <div className='w-screen bg-white'>
 
-          {/* 项目图片集 */}
-          {project.images.length > 1 && (
+          {/* 项目图片集（包含封面图）*/}
+          {galleryImages.length > 0 && (
             <section className="py-20">
               <div className="max-w-7xl mx-auto px-6 lg:px-8">
                 <div className="fade-in-up">
                   <h2 className="text-2xl md:text-3xl font-playfair font-light mb-12 text-center tracking-wide text-gray-800">
-                    项目图片
+                    項目圖片
                   </h2>
                   <SimpleImageViewer 
-                    images={project.images}
+                    images={galleryImages}
                     title={project.title}
                     projectId={project.id}
                   />

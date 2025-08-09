@@ -114,9 +114,9 @@ npm run dev
 - **状态管理**：发布状态、精选状态、排序权重
 
 ### 项目分类
-- `ARCHITECTURE`：建筑设计
-- `INTERIOR`：室内设计  
-- `PLANNING`：城市规划
+- `ARCHITECTURE`：建築設計
+- `INTERIOR`：室內設計
+- `PLANNING`：城市規劃
 - `LANDSCAPE`：景观设计
 - `URBAN_DESIGN`：城市设计
 - `RESEARCH`：研究项目

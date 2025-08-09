@@ -4,23 +4,23 @@ import { ProjectCategory } from '../../lib/types';
 import ProjectsPageClient from './ProjectsPageClient';
 
 // 项目类型映射
-const categoryMap: Record<ProjectCategory, string> = {
-  [ProjectCategory.ARCHITECTURE]: '建筑设计',
+const categoryMap: Partial<Record<ProjectCategory, string>> = {
+  [ProjectCategory.ARCHITECTURE]: '建築設計',
   [ProjectCategory.INTERIOR]: '室内设计',
   [ProjectCategory.PLANNING]: '城市规划',
   [ProjectCategory.LANDSCAPE]: '景观设计',
-  [ProjectCategory.URBAN_DESIGN]: '城市设计',
-  [ProjectCategory.RESEARCH]: '研究项目',
+  // 已移除：URBAN_DESIGN（城市設計）
+  // 已移除：RESEARCH（研究項目）
 };
 
 // 类型到URL映射
-const categoryUrlMap: Record<ProjectCategory, string> = {
+const categoryUrlMap: Partial<Record<ProjectCategory, string>> = {
   [ProjectCategory.ARCHITECTURE]: 'architecture',
   [ProjectCategory.INTERIOR]: 'interior',
   [ProjectCategory.PLANNING]: 'planning',
   [ProjectCategory.LANDSCAPE]: 'landscape',
-  [ProjectCategory.URBAN_DESIGN]: 'urban-design',
-  [ProjectCategory.RESEARCH]: 'research',
+  // 已移除：URBAN_DESIGN（urban-design）
+  // 已移除：RESEARCH（research）
 };
 
 // 获取所有项目，按分类分组

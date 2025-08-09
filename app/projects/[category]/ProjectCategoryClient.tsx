@@ -97,13 +97,7 @@ export default function ProjectCategoryClient({
                     />
                     <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     
-                    {project.isFeatured && (
-                      <div className="absolute top-4 left-4">
-                        <span className="text-xs tracking-wider text-white/80 border border-white/30 px-3 py-1 rounded-full backdrop-blur-sm">
-                          FEATURED
-                        </span>
-                      </div>
-                    )}
+                    {/* 精选标签已移除 */}
                   </div>
 
                   <div className="space-y-3">

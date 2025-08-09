@@ -11,12 +11,12 @@ interface ProjectCategoryPageProps {
 
 // 类型映射
 const categoryMap: Record<string, { name: string; enum: ProjectCategory }> = {
-  'architecture': { name: '建筑设计', enum: ProjectCategory.ARCHITECTURE },
-  'interior': { name: '室内设计', enum: ProjectCategory.INTERIOR },
-  'planning': { name: '城市规划', enum: ProjectCategory.PLANNING },
-  'landscape': { name: '景观设计', enum: ProjectCategory.LANDSCAPE },
-  'urban-design': { name: '城市设计', enum: ProjectCategory.URBAN_DESIGN },
-  'research': { name: '研究项目', enum: ProjectCategory.RESEARCH },
+  'architecture': { name: '建築設計', enum: ProjectCategory.ARCHITECTURE },
+  'interior': { name: '室內設計', enum: ProjectCategory.INTERIOR },
+  'planning': { name: '城市規劃', enum: ProjectCategory.PLANNING },
+  'landscape': { name: '景觀設計', enum: ProjectCategory.LANDSCAPE },
+  // 已移除：'urban-design'（城市設計）
+  // 已移除：'research'（研究項目）
 };
 
 // 获取分类项目

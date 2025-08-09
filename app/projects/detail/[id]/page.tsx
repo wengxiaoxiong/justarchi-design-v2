@@ -40,13 +40,13 @@ async function getRelatedProjects(currentProjectId: string, category: ProjectCat
 
 
 // 项目类型映射
-const categoryMap: Record<ProjectCategory, string> = {
-  [ProjectCategory.ARCHITECTURE]: '建筑设计',
+const categoryMap: Partial<Record<ProjectCategory, string>> = {
+  [ProjectCategory.ARCHITECTURE]: '建築設計',
   [ProjectCategory.INTERIOR]: '室内设计',
   [ProjectCategory.PLANNING]: '城市规划',
   [ProjectCategory.LANDSCAPE]: '景观设计',
-  [ProjectCategory.URBAN_DESIGN]: '城市设计',
-  [ProjectCategory.RESEARCH]: '研究项目',
+  // 已移除：URBAN_DESIGN（城市設計）
+  // 已移除：RESEARCH（研究項目）
 };
 
 

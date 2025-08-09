@@ -13,8 +13,8 @@ const categoryItems: CategoryItem[] = [
   { name: '室內設計', nameEn: 'Interior', key: 'interior', href: '/projects/interior' },
   { name: '城市規劃', nameEn: 'Planning', key: 'planning', href: '/projects/planning' },
   { name: '景觀設計', nameEn: 'Landscape', key: 'landscape', href: '/projects/landscape' },
-  { name: '城市設計', nameEn: 'Urban Design', key: 'urban-design', href: '/projects/urban-design' },
-  { name: '研究項目', nameEn: 'Research', key: 'research', href: '/projects/research' }
+  // 已移除：城市設計（urban-design）
+  // 已移除：研究項目（research）
 ];
 
 interface ProjectNavigationProps {

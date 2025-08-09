@@ -7,12 +7,12 @@ import AdminProjectList from './AdminProjectList';
 
 // 项目类型映射
 const categoryMap: Record<ProjectCategory, string> = {
-  [ProjectCategory.ARCHITECTURE]: '建筑设计',
-  [ProjectCategory.INTERIOR]: '室内设计',
-  [ProjectCategory.PLANNING]: '城市规划',
-  [ProjectCategory.LANDSCAPE]: '景观设计',
-  [ProjectCategory.URBAN_DESIGN]: '城市设计',
-  [ProjectCategory.RESEARCH]: '研究项目',
+  [ProjectCategory.ARCHITECTURE]: '建築設計',
+  [ProjectCategory.INTERIOR]: '室內設計',
+  [ProjectCategory.PLANNING]: '城市規劃',
+  [ProjectCategory.LANDSCAPE]: '景觀設計',
+  // 已移除：URBAN_DESIGN（城市設計）
+  // 已移除：RESEARCH（研究項目）
 };
 
 
@@ -94,7 +94,7 @@ export default async function AdminPage() {
                 </div>
                 <div className="ml-5 w-0 flex-1">
                   <dl>
-                    <dt className="text-sm font-medium text-gray-500 truncate">总项目数</dt>
+                    <dt className="text-sm font-medium text-gray-500 truncate">總項目書</dt>
                     <dd className="text-lg font-medium text-gray-900">{stats.total}</dd>
                   </dl>
                 </div>
@@ -114,7 +114,7 @@ export default async function AdminPage() {
                 </div>
                 <div className="ml-5 w-0 flex-1">
                   <dl>
-                    <dt className="text-sm font-medium text-gray-500 truncate">已发布</dt>
+                    <dt className="text-sm font-medium text-gray-500 truncate">已發佈</dt>
                     <dd className="text-lg font-medium text-gray-900">{stats.published}</dd>
                   </dl>
                 </div>
@@ -134,7 +134,7 @@ export default async function AdminPage() {
                 </div>
                 <div className="ml-5 w-0 flex-1">
                   <dl>
-                    <dt className="text-sm font-medium text-gray-500 truncate">精选项目</dt>
+                    <dt className="text-sm font-medium text-gray-500 truncate">精選項目</dt>
                     <dd className="text-lg font-medium text-gray-900">{stats.featured}</dd>
                   </dl>
                 </div>

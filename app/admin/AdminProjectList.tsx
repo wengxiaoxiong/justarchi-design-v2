@@ -69,11 +69,7 @@ export default function AdminProjectList({ projects, categoryMap }: AdminProject
                         {project.title}
                       </p>
                       <div className="ml-2 flex-shrink-0 flex">
-                        {project.isFeatured && (
-                          <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-yellow-100 text-yellow-800">
-                            精选
-                          </span>
-                        )}
+                        {/* 精选标签已移除 */}
                         <span className={`ml-2 inline-flex items-center px-2 py-0.5 rounded text-xs font-medium ${
                           project.isPublished
                             ? 'bg-green-100 text-green-800'

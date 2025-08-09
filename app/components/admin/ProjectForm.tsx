@@ -9,12 +9,12 @@ import { SingleImageUpload } from './SingleImageUpload';
 
 // 项目类型选项
 const categoryOptions = [
-  { value: ProjectCategory.ARCHITECTURE, label: '建筑设计' },
+  { value: ProjectCategory.ARCHITECTURE, label: '建築設計' },
   { value: ProjectCategory.INTERIOR, label: '室内设计' },
-  { value: ProjectCategory.PLANNING, label: '城市规划' },
+  { value: ProjectCategory.PLANNING, label: ' 城市規劃' },
   { value: ProjectCategory.LANDSCAPE, label: '景观设计' },
-  { value: ProjectCategory.URBAN_DESIGN, label: '城市设计' },
-  { value: ProjectCategory.RESEARCH, label: '研究项目' },
+  // 已移除：URBAN_DESIGN（城市設計）
+  // 已移除：RESEARCH（研究項目）
 ];
 
 
@@ -318,7 +318,7 @@ export function ProjectForm({ mode, projectId, onSuccess }: ProjectFormProps) {
 
           {/* 项目图片 */}
           <div className="bg-white shadow rounded-lg p-6">
-            <h3 className="text-lg font-medium text-gray-900 mb-6">项目图片</h3>
+            <h3 className="text-lg font-medium text-gray-900 mb-6">項目圖片</h3>
             
             <div className="space-y-6">
               <div>
