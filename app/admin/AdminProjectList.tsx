@@ -9,7 +9,7 @@ import { Project } from '@prisma/client';
 
 interface AdminProjectListProps {
   projects: Project[];
-  categoryMap: Record<ProjectCategory, string>;
+  categoryMap: Partial<Record<ProjectCategory, string>>;
 }
 
 export default function AdminProjectList({ projects, categoryMap }: AdminProjectListProps) {

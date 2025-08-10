@@ -6,7 +6,7 @@ import { getAllProjects } from '../../lib/actions';
 import AdminProjectList from './AdminProjectList';
 
 // 项目类型映射
-const categoryMap: Record<ProjectCategory, string> = {
+const categoryMap: Partial<Record<ProjectCategory, string>> = {
   [ProjectCategory.ARCHITECTURE]: '建築設計',
   [ProjectCategory.INTERIOR]: '室內設計',
   [ProjectCategory.PLANNING]: '城市規劃',

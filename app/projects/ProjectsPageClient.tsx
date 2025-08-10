@@ -7,14 +7,14 @@ import { ProjectCategory, Project } from '../../lib/types';
 import ProjectNavigation from '../components/landing-page/ProjectNavigation';
 
 interface ProjectsPageClientProps {
-  projectsGrouped: Record<ProjectCategory, Project[]>;
+  projectsGrouped: Partial<Record<ProjectCategory, Project[]>>;
   stats: {
     total: number;
     featured: number;
-    byCategory: Record<ProjectCategory, number>;
+    byCategory: Partial<Record<ProjectCategory, number>>;
   };
-  categoryMap: Record<ProjectCategory, string>;
-  categoryUrlMap: Record<ProjectCategory, string>;
+  categoryMap: Partial<Record<ProjectCategory, string>>;
+  categoryUrlMap: Partial<Record<ProjectCategory, string>>;
 }
 
 export default function ProjectsPageClient({ 
