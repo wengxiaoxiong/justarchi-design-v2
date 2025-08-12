@@ -3,6 +3,9 @@ import { prisma } from '../../lib/db';
 import { ProjectCategory } from '../../lib/types';
 import ProjectsPageClient from './ProjectsPageClient';
 
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
+
 // 项目类型映射
 const categoryMap: Partial<Record<ProjectCategory, string>> = {
   [ProjectCategory.ARCHITECTURE]: '建築設計',

@@ -4,6 +4,9 @@ import { prisma } from '../../../../lib/db';
 import { ProjectCategory } from '../../../../lib/types';
 import ProjectDetailClient from './ProjectDetailClient';
 
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
+
 interface ProjectDetailPageProps {
   params: Promise<{ id: string }>;
 }
@@ -38,7 +41,6 @@ async function getRelatedProjects(currentProjectId: string, category: ProjectCat
   return projects;
 }
 
-
 // 项目类型映射
 const categoryMap: Partial<Record<ProjectCategory, string>> = {
   [ProjectCategory.ARCHITECTURE]: '建築設計',
@@ -48,8 +50,6 @@ const categoryMap: Partial<Record<ProjectCategory, string>> = {
   // 已移除：URBAN_DESIGN（城市設計）
   // 已移除：RESEARCH（研究項目）
 };
-
-
 
 export default async function ProjectDetailPage({ params }: ProjectDetailPageProps) {
   const { id } = await params;
