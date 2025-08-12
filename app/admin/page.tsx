@@ -4,6 +4,10 @@ import Link from 'next/link';
 import { ProjectCategory } from '../../lib/types';
 import { getAllProjects } from '../../lib/actions';
 import AdminProjectList from './AdminProjectList';
+import { LogoutButton } from '@/app/components/admin/LogoutButton';
+
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
 
 // 项目类型映射
 const categoryMap: Partial<Record<ProjectCategory, string>> = {
@@ -68,6 +72,7 @@ export default async function AdminPage() {
                 </svg>
                 新建项目
               </Link>
+              <LogoutButton />
               <Link
                 href="/"
                 className="text-gray-600 hover:text-gray-900 text-sm font-medium"

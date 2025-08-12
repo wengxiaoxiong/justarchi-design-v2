@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import { 
   getArchitectureIndexProjects,
@@ -7,18 +7,16 @@ import {
 } from '../lib/actions';
 import LandingPageClient from './components/landing-page/LandingPageClient';
 
-
-export const revalidate = 3600; // 缓存1小时
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
 
 const App = async () => {
-  // 并行获取所有项目数据
   const [architectureProjects, interiorProjects, planningProjects] = await Promise.all([
     getArchitectureIndexProjects(),
     getInteriorIndexProjects(),
     getPlanningIndexProjects()
   ]);
 
-  
   return (
     <LandingPageClient 
       architectureProjects={architectureProjects}

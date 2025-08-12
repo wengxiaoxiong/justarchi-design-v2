@@ -4,6 +4,8 @@ import { prisma } from '../../../lib/db';
 import { ProjectCategory } from '../../../lib/types';
 import ProjectCategoryClient from './ProjectCategoryClient';
 
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
 
 interface ProjectCategoryPageProps {
   params: Promise<{ category: string }>;
@@ -35,8 +37,6 @@ async function getProjectsByCategory(category: ProjectCategory) {
 
   return projects;
 }
-
-
 
 async function ProjectCategoryPage({ params }: ProjectCategoryPageProps) {
   const { category } = await params;

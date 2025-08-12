@@ -220,3 +220,15 @@ MIT License
 ## 贡献
 
 欢迎提交 Issues 和 Pull Requests！
+
+## 管理后台鉴权
+- 仅 `/admin/**` 需要登录访问，其它页面均公开。
+- 登录入口：`/admin/login`
+- 环境变量：
+  - `ADMIN_JWT_SECRET`：JWT 签名密钥（生产环境务必设置）
+- 创建管理员：
+  - 确保数据库可连接（`DATABASE_URL`）
+  - 安装依赖并推送 schema 后，执行：
+    ```bash
+    ADMIN_EMAIL=admin@example.com ADMIN_PASSWORD=StrongPass123 npm run create-admin
+    ```
