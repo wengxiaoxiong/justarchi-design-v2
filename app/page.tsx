@@ -7,7 +7,10 @@ import {
 } from '../lib/actions';
 import LandingPageClient from './components/landing-page/LandingPageClient';
 
-const App: React.FC = async () => {
+
+export const revalidate = 3600; // 缓存1小时
+
+const App = async () => {
   // 并行获取所有项目数据
   const [architectureProjects, interiorProjects, planningProjects] = await Promise.all([
     getArchitectureIndexProjects(),
