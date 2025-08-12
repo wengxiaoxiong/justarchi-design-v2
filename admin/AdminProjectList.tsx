@@ -3,8 +3,8 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { ProjectCategory } from '../../lib/types';
-import { deleteProject } from '../../lib/actions';
+import { ProjectCategory } from '../lib/types';
+import { deleteProject } from '../lib/actions';
 import { Project } from '@prisma/client';
 
 interface AdminProjectListProps {

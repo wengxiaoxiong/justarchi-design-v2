@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react';
 import Link from 'next/link';
-import { ProjectCategory } from '../../lib/types';
-import { getAllProjects } from '../../lib/actions';
+import { ProjectCategory } from '../lib/types';
+import { getAllProjects } from '../lib/actions';
 import AdminProjectList from './AdminProjectList';
 
 // 项目类型映射
